@@ -1,0 +1,8 @@
+{
+   "email": "",
+    "emailEs" : "",
+    "password": "",
+    "cognitoUser": "",
+    "cognitoPassword": "",
+    "launchDarklyAccessToken": ""
+}

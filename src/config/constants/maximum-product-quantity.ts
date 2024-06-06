@@ -1,0 +1,1 @@
+export const MAXIMUM_PRODUCT_QUANTITY = 50

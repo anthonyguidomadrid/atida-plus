@@ -1,0 +1,34 @@
+query SeoBlock(
+  $locale: String!
+  $tags: [String!]!
+  $slug: String!
+) {
+  seoCollection(
+    locale: $locale
+    where: {
+      slug: $slug
+      contentfulMetadata: { tags: { id_contains_all: $tags } }
+    }
+  ) {
+    items {
+      title
+      description
+      keywords
+      image {
+        url
+      }
+      header
+      copy {
+        json
+      }
+      copyExpandable {
+        json
+      }
+      noIndex
+      noFollow
+      link {
+        slug
+      }
+    }
+  }
+}

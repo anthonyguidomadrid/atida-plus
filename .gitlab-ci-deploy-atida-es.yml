@@ -1,0 +1,9 @@
+include:
+  - local: ".gitlab-ci-deploy-fe-application-standard.yml"
+
+variables:
+  SHOP_LOCALE: 'atida-es'
+  # this will look for variable 'K8S_DEV_SECRET_CMS_TOKEN'
+  VAR_LOCALE: ''
+  ENV_VAR_CONTENTFUL: "$envLocalContentful_ES"
+  K8S_NAMESPACE: 'frontend'

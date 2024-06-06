@@ -1,0 +1,25 @@
+fragment categoryTile on CategoryTile {
+  __typename
+  title
+  color
+  url
+  imageAsset {
+    __typename
+    title
+    description
+    url
+  }
+  titleColor {
+    ref
+  }
+}
+
+fragment categoryGrid on CategoryGrid {
+  title
+  itemsCollection(limit: 20) {
+    items {
+      ...categoryTile
+    }
+  }
+  viewType
+}

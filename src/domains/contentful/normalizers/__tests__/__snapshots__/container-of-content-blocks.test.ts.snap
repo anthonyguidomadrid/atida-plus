@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`normalizeContainerOfContentBlocks GraphQL MarketingTeaser blocks pulls out the container of content blocks Marketing Teasers 1`] = `
+Object {
+  "blocks": Array [
+    Object {
+      "backgroundColor": "category-beauty",
+      "contentType": "MarketingTeaser",
+      "description": "High quality vitamins for a low price. PT",
+      "hasButton": true,
+      "isFullWidthImage": false,
+      "isSponsoredContent": false,
+      "labelColor": "secondary-portland-orange",
+      "labelText": "20 % Discount PT",
+      "title": "Boost your immunity PT",
+      "url": "/boost-your-immunity-pt",
+    },
+    Object {
+      "backgroundColor": "category-nutrition-exercise-and-weight-loss",
+      "contentType": "MarketingTeaser",
+      "hasButton": false,
+      "image": Object {
+        "url": "https://images.ctfassets.net/7g2w796onies/6EOfodeKNE2uKYxJTrpbrA/2b730c8a3d7b66e27a4a78863c7a5156/ac6bb2e17841f7dd4ebd7b1fd77f0185.png",
+      },
+      "isFullWidthImage": false,
+      "isSponsoredContent": false,
+      "labelColor": "primary-oxford-blue",
+      "labelText": "Exclusive offer PT",
+      "title": "Save over 50% with Atida Plus PT",
+      "url": "/save-over-50-with-atida-plus",
+    },
+  ],
+  "contentType": "ContainerOfContentBlocks",
+  "displayTitle": true,
+  "hasSmallMargin": false,
+  "title": "Home page marketing teasers",
+}
+`;
+
+exports[`normalizeContainerOfContentBlocks GraphQL Promotion blocks pulls out the container of content blocks Promotions 1`] = `
+Object {
+  "blocks": Array [
+    Object {
+      "categories": Array [],
+      "color": "category-beauty",
+      "contentType": "Promotion",
+      "description": "<p>We&#39;re here to help. Ask about our products or get expert medical advice.</p>",
+      "id": "Avene has an e with french accent",
+      "image": Object {
+        "title": "Beauty Category Image",
+        "type": "image/png",
+        "url": "//images.ctfassets.net/7g2w796onies/3Pa3xwIiNIsKGQB2SE2KYy/9045bf905aba7e22e69054b4419c58a9/category-header-sample.png",
+      },
+      "isContentWithImage": false,
+      "isSponsoredContent": false,
+      "labels": Array [
+        Object {
+          "label": "campaign-promo.black-friday.promo.2021",
+          "type": "campaign-promo",
+        },
+        Object {
+          "label": "campaign-promo.black-friday",
+          "type": "campaign-promo",
+        },
+      ],
+      "promoInformation": "",
+      "teaserDescription": "oh, shit...Monday came in",
+      "title": "Avène",
+      "url": "",
+    },
+    Object {
+      "categories": Array [],
+      "color": "category-beauty",
+      "contentType": "Promotion",
+      "description": "<p>We&#39;re here to help. Ask about our products or get expert medical advice.</p>",
+      "id": "Avene has an e with french accent",
+      "image": Object {
+        "title": "Beauty Category Image",
+        "type": "image/png",
+        "url": "//images.ctfassets.net/7g2w796onies/3Pa3xwIiNIsKGQB2SE2KYy/9045bf905aba7e22e69054b4419c58a9/category-header-sample.png",
+      },
+      "isContentWithImage": false,
+      "isSponsoredContent": false,
+      "labels": Array [],
+      "promoInformation": "",
+      "teaserDescription": "oh, shit...Monday came in",
+      "title": "Avène",
+      "url": "",
+    },
+  ],
+  "contentType": "ContainerOfContentBlocks",
+  "displayTitle": false,
+  "hasSmallMargin": false,
+  "title": "Home page Promotion Blocks",
+}
+`;
+
+exports[`normalizeContainerOfContentBlocks GraphQL null blocks does not error 1`] = `
+Object {
+  "blocks": Array [],
+  "contentType": "ContainerOfContentBlocks",
+  "displayTitle": false,
+  "hasSmallMargin": false,
+  "title": "Home page Promotion Blocks",
+}
+`;

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fetchRecommendations returns an empty list when exponea API fails 1`] = `
+Object {
+  "items": Array [],
+  "recommendationId": "someRecommendationId",
+}
+`;
+
+exports[`fetchRecommendations returns an empty list when exponea does not return any recommendations 1`] = `
+Object {
+  "items": Array [],
+  "recommendationId": "someRecommendationId",
+}
+`;

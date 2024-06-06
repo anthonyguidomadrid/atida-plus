@@ -1,0 +1,21 @@
+query Promotions(
+  $locale: String!
+  $allLocales: [String!]!
+  $limit: Int
+  $skip: Int
+  $where: PromotionFilter!
+) {
+  promotionCollection(
+    locale: $locale
+    where: $where
+    order: [weight_ASC, validFrom_DESC, sys_publishedAt_DESC]
+    limit: $limit
+    skip: $skip
+  ) {
+    total
+    items {
+      __typename
+      ...promotion
+    }
+  }
+}

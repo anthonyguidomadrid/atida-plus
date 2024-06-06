@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+commonLabels:
+  app: frontend
+bases:
+  - ../base
+patchesJson6902:
+  - path: hostname.yml
+    target:
+      group: networking.k8s.io
+      kind: Ingress
+      name: frontend
+      version: v1
+patchesStrategicMerge:
+  - configmap.yml
+  - middleware-redirect-www.yml

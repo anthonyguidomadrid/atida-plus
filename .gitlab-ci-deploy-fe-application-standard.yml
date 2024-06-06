@@ -1,0 +1,343 @@
+## $SHOP_LOCALE identify the kubernetes sub-folder to fallback to
+
+stages:
+  - validate
+  - backup
+  - pre-deploy
+  - deploy
+  - post-deploy
+  - post-test
+  - sync-uat-validate
+  - sync-uat
+  - deploy-master
+
+include:
+  - local: ".gitlab-ci-deploy-fe-application-contentful.yml"
+  - local: ".gitlab-ci-deploy-fe-application-expedite.yml"
+  - local: ".gitlab-ci-deploy-lighthouse.yml"
+  - local: ".gitlab-ci-deploy-postman.yml"
+
+.create-secret-function: &create-secret-function |
+
+  create_secret() {
+    env | sed -n "s/^K8S_SECRET_\(.*\)$/\1/p"
+    env | sed -n "s/^K8S$(echo "${VAR_LOCALE}" | tr '[a-z]' '[A-Z]')_$(echo "${ENVIRONMENT}" | tr '[a-z]' '[A-Z]')_SECRET_\(.*\)$/\1/p"
+  }
+
+.dev:
+  variables:
+    ENVIRONMENT: dev
+    KUBE_NAMESPACE: $K8S_NAMESPACE
+    AWS_IAM_ROLE_ARN: arn:aws:iam::180821729581:role/gitlab-frontend
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+
+.uat:
+  variables:
+    ENVIRONMENT: uat
+    KUBE_NAMESPACE: $K8S_NAMESPACE
+    AWS_IAM_ROLE_ARN: arn:aws:iam::180821729581:role/gitlab-frontend
+  tags:
+    - fast
+    - priority
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^(release\/)/
+      when: manual
+
+.prod:
+  variables:
+    ENVIRONMENT: prod
+    KUBE_NAMESPACE: $K8S_NAMESPACE
+    AWS_IAM_ROLE_ARN: arn:aws:iam::024195152389:role/gitlab-frontend
+  tags:
+    - fast
+    - priority
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      when: manual
+
+.k8s:
+  image:
+    name: ${ECR_REGISTRY_ATIDA}/ci:infra-0.16.0
+    entrypoint:
+      - "/bin/ash"
+      - "-c"
+  tags:
+    - ec2
+  variables:
+    SECRET_NAME: frontend
+  before_script:
+    - echo -e "machine gitlab.com\nlogin gitlab-ci-token\npassword ${CI_JOB_TOKEN}" > ~/.netrc
+    - export AWS_ACCESS_KEY_ID="${NEW_AWS_ACCESS_KEY_ID:-$AWS_ACCESS_KEY_ID}" AWS_SECRET_ACCESS_KEY="${NEW_AWS_SECRET_ACCESS_KEY:-$AWS_SECRET_ACCESS_KEY}"
+    - set -o pipefail && export $(aws sts assume-role --role-arn ${AWS_IAM_ROLE_ARN} --role-session-name "gitlab-$ENVIRONMENT-ci"  | jq -r  '.Credentials | "AWS_SESSION_TOKEN=\(.SessionToken) AWS_ACCESS_KEY_ID=\(.AccessKeyId) AWS_SECRET_ACCESS_KEY=\(.SecretAccessKey) "')
+    - aws eks update-kubeconfig --name "eks-atida-${ENVIRONMENT}"
+    - kubectl config set-context --current "--namespace=${KUBE_NAMESPACE}"
+    - *create-secret-function
+    - create_secret > kubernetes/base/.env
+    - cd "kubernetes/${SHOP_LOCALE}/${ENVIRONMENT}"
+    - kustomize edit set image "frontend=${CI_IMAGE}"
+    - cd ..
+
+.k8s-plan:
+  extends:
+    - .k8s
+  script:
+    - kustomize build ${ENVIRONMENT} | kubectl apply --dry-run=server -o yaml -f -
+    - kustomize build ${ENVIRONMENT} | kubectl diff -f - || echo
+    - kustomize build ${ENVIRONMENT} | kubectl apply --dry-run=server -f -
+
+.k8s-deploy:
+  extends:
+    - .k8s
+  script:
+    - kustomize build ${ENVIRONMENT} | kubectl apply -f -
+    - kubectl rollout status --timeout="${DEPLOY_TIMEOUT:-5m}" deployment/frontend
+    - kustomize build ${ENVIRONMENT} | kubectl apply -f - --prune --selector app=frontend,generated=true --prune-whitelist 'core/v1/Secret'
+
+k8s-plan-dev:
+  stage: validate
+  extends:
+    - .k8s-plan
+    - .dev
+
+k8s-plan-uat:
+  stage: validate
+  extends:
+    - .k8s-plan
+    - .uat
+
+k8s-plan-prod:
+  stage: validate
+  extends:
+    - .k8s-plan
+    - .prod
+
+contentful-backup-dev:
+  stage: backup
+  needs: [k8s-plan-dev]
+  variables:
+    ENV_LOCAL_CONTENTFUL: "$ENV_VAR_CONTENTFUL"
+  extends:
+    - .contentful-backup
+    - .dev
+  allow_failure: true
+
+contentful-backup-uat:
+  stage: backup
+  needs: [k8s-plan-uat]
+  variables:
+    ENV_LOCAL_CONTENTFUL: "$ENV_VAR_CONTENTFUL"
+  extends:
+    - .contentful-backup
+    - .uat
+  allow_failure: true
+
+contentful-backup-prod:
+  stage: backup
+  needs: [k8s-plan-prod]
+  variables:
+    ENV_LOCAL_CONTENTFUL: "$ENV_VAR_CONTENTFUL"
+    ENVIRONMENT: master
+  extends:
+    - .contentful-backup
+    - .prod
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      when: on_success
+      allow_failure: true
+    - if: $CI_COMMIT_BRANCH != "master"
+      when: never
+
+k8s-optional-deploy-prod-contentful-master:
+  stage: deploy-master
+  needs: [contentful-sync-to-uat-validate]
+  extends:
+    - .k8s-deploy
+    - .prod
+  allow_failure: true
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      when: manual
+      allow_failure: true
+    - if: $CI_COMMIT_BRANCH != "master"
+      when: never
+
+contentful-migrations-dev:
+  stage: post-deploy
+  needs: [k8s-deploy-dev]
+  variables:
+    ENV_LOCAL_CONTENTFUL: "$ENV_VAR_CONTENTFUL"
+  extends:
+    - .contentful-migrations
+    - .dev
+  allow_failure: true
+
+contentful-migrations-uat:
+  stage: post-deploy
+  needs: [k8s-deploy-uat]
+  variables:
+    ENV_LOCAL_CONTENTFUL: "$ENV_VAR_CONTENTFUL"
+  extends:
+    - .contentful-migrations
+    - .uat
+  allow_failure: true
+
+contentful-prepare-master-prod:
+  stage: pre-deploy
+  needs: [contentful-backup-prod]
+  variables:
+    ENV_LOCAL_CONTENTFUL: "$ENV_VAR_CONTENTFUL"
+  extends:
+    - .contentful-prepare-master-prod
+    - .prod
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      when: manual
+      allow_failure: false
+    - if: $CI_COMMIT_BRANCH != "master"
+      when: never
+    - when: manual
+      allow_failure: true
+
+k8s-deploy-dev:
+  stage: deploy
+  needs: [contentful-backup-dev]
+  extends:
+    - .k8s-deploy
+    - .dev
+
+k8s-deploy-uat:
+  stage: deploy
+  needs: [contentful-backup-uat]
+  extends:
+    - .k8s-deploy
+    - .uat
+
+k8s-deploy-prod:
+  stage: deploy
+  needs: [contentful-prepare-master-prod]
+  extends:
+    - .k8s-deploy
+    - .prod
+  before_script:
+    - LATEST_RELEASE=$(git describe --abbrev=0 --tags)
+    - cd "kubernetes/${SHOP_LOCALE}/${ENVIRONMENT}"
+    - sed -i'.original' -E "s/CMS_ENVIRONMENT_ID\:\ master/CMS_ENVIRONMENT_ID\:\ release-$LATEST_RELEASE/" configmap.yml
+    - cd ../../../
+    - !reference [.k8s, before_script]
+
+contentful-link-release-prod:
+  stage: post-deploy
+  needs: [k8s-deploy-prod]
+  variables:
+    ENV_LOCAL_CONTENTFUL: "$ENV_VAR_CONTENTFUL"
+  extends:
+    - .contentful-link-release-prod
+    - .prod
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      when: on_success
+      allow_failure: false
+    - if: $CI_COMMIT_BRANCH != "master"
+      when: never
+    - when: manual
+      allow_failure: true
+
+contentful-sync-to-uat-validate:
+  stage: sync-uat-validate
+  needs: [contentful-link-release-prod]
+  variables:
+    ENV_LOCAL_CONTENTFUL: "$ENV_VAR_CONTENTFUL"
+  extends:
+    - .contentful-sync-to-uat-validate
+    - .prod
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      when: on_success
+      allow_failure: true
+    - if: $CI_COMMIT_BRANCH != "master"
+      when: never
+
+contentful-sync-to-uat-run:
+  stage: sync-uat
+  needs: [contentful-sync-to-uat-validate]
+  variables:
+    ENV_LOCAL_CONTENTFUL: "$ENV_VAR_CONTENTFUL"
+  extends:
+    - .contentful-sync-to-uat-run
+    - .prod
+  allow_failure: true
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      when: manual
+      allow_failure: true
+    - if: $CI_COMMIT_BRANCH != "master"
+      when: never
+
+k8s-plan-uat-expedite:
+  stage: validate
+  variables:
+    KUBE_NAMESPACE: "$K8S_NAMESPACE"
+  extends:
+    - .k8s-plan
+    - .uat-expedite
+
+k8s-plan-prod-expedite:
+  stage: validate
+  variables:
+    KUBE_NAMESPACE: "$K8S_NAMESPACE"
+  extends:
+    - .k8s-plan
+    - .prod-expedite
+
+uat-expedite-deploy:
+  stage: deploy
+  needs: [k8s-plan-uat-expedite]
+  variables:
+    KUBE_NAMESPACE: "$K8S_NAMESPACE"
+  extends:
+    - .k8s-deploy
+    - .uat-expedite
+
+prod-expedite-deploy:
+  stage: deploy
+  needs: [k8s-plan-prod-expedite]
+  variables:
+    KUBE_NAMESPACE: "$K8S_NAMESPACE"
+  extends:
+    - .k8s-deploy
+    - .prod-expedite
+
+postman_tests:deploy:
+  stage: post-test
+  needs: [k8s-deploy-dev]
+  extends:
+    - .postman_tests
+  rules:
+    - when: never
+    - if: $CI_COMMIT_BRANCH == "develop"
+      when: always
+      allow_failure: true
+    - when: never
+
+lighthouse:dev-deploy:
+  stage: post-test
+  extends:
+    - .lighthouse
+  needs: [k8s-deploy-dev]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+      when: manual
+      allow_failure: true
+    - when: never
+
+lighthouse:prod-deploy:
+  stage: post-test
+  extends:
+    - .lighthouse
+  needs: [contentful-link-release-prod]
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      when: manual
+      allow_failure: true
+    - when: never

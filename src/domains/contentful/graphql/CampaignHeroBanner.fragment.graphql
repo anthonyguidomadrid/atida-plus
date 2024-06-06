@@ -1,0 +1,20 @@
+fragment campaignHeroBanner on CampaignHeroBanner {
+  title
+  altTitle
+  description {
+    __typename
+    json
+  }
+  isSponsoredContent
+  finishingDate
+  backgroundColor {
+    __typename
+    ref
+  }
+  image {
+    __typename
+    title
+    url
+  }
+  campaignUrl: url
+}

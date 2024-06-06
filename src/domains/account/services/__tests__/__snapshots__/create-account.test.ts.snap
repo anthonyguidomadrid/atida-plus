@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createCustomerAccount returns the normalized customer response 1`] = `
+Object {
+  "accountType": "Personal",
+  "company": null,
+  "email": "some@email.com",
+  "emailNotification": true,
+  "firstName": "Test",
+  "lastName": "McTest",
+  "salutation": "Mr",
+  "surcharge": false,
+}
+`;

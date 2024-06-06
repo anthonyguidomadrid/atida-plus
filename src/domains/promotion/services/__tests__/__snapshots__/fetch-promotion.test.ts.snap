@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fetchPromotions fetch promotions returns the normalized response 1`] = `
+Object {
+  "items": Array [
+    Object {
+      "categories": Array [
+        Object {
+          "id": "beauty",
+          "path": Object {
+            "id0": "beauty",
+          },
+        },
+        Object {
+          "id": "beauty_body",
+          "path": Object {
+            "id0": "beauty_body",
+          },
+        },
+      ],
+      "color": "category-personal-care",
+      "contentType": "Promotion",
+      "description": "<p>This is a test promotion 50% of Tropicania</p>",
+      "id": "marjolein.test",
+      "image": Object {
+        "url": "https://images.ctfassets.net/7g2w796onies/2FxL8j1drC2fIORm0MPbas/d151066571b4b7d4e8024909abf54afb/AVene.png",
+      },
+      "isContentWithImage": true,
+      "isSponsoredContent": false,
+      "labels": Array [
+        Object {
+          "label": "campaign-promo.black-friday.promo.2021",
+          "type": "campaign-promo",
+        },
+        Object {
+          "label": "Whoop whoop 2",
+          "type": "promotion",
+        },
+      ],
+      "promoInformation": "",
+      "teaserDescription": "Whoop whoop",
+      "title": "Marjolein Test promo",
+      "url": "/marjolein-test-promo",
+      "validFrom": "2021-06-04T00:00:00.000+02:00",
+      "validTo": "2021-06-11T00:00:00.000+02:00",
+    },
+  ],
+  "total": 8,
+}
+`;

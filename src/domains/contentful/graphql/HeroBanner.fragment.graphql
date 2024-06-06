@@ -1,0 +1,28 @@
+fragment heroBanner on HeroBanner {
+  heroBannerTitle: newTitle
+  searchPlaceholder
+  isSponsoredContent
+  link {
+    __typename
+    label
+    url
+    icon {
+      __typename
+      ref
+    }
+    content {
+      __typename
+      json
+    }
+  }
+  text {
+    __typename
+    json
+  }
+  imageAsset {
+    __typename
+    title
+    description
+    url
+  }
+}

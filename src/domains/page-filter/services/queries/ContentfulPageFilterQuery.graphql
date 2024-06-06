@@ -1,0 +1,39 @@
+query PageFilters($slug: String!, $locale: String!, $tags: [String!]!) {
+  filterPageTypeCollection(
+    limit: 1
+    locale: $locale
+    where: { pageSlug: $slug, contentfulMetadata: { tags: { id_contains_all: $tags } } }
+  ) {
+    items {
+      ... on FilterPageType {
+        pageTypeName
+        pageSlug
+        pageFiltersCollection(limit: 3) {
+          items {
+            filterCollectionName
+            filterItemsCollection(limit: 15) {
+              items {
+                filterItemName
+                itemToFilterBy {
+                  __typename
+                  ... on Category {
+                    id
+                    title
+                  }
+                  ... on Translation {
+                    key
+                    value
+                  }
+                  ... on TranslationInfoLabel {
+                    labelKey
+                    translation
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

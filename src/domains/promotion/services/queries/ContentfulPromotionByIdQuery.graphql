@@ -1,0 +1,23 @@
+query PromotionById (
+  $locale: String!
+  $tags: [String!]!
+  $id: String!
+) {
+  promotionCollection(
+    locale: $locale
+    where: {
+      contentfulMetadata: { tags: { id_contains_all: $tags } }
+      id: $id
+    }
+  ) {
+    total
+    items {
+      __typename
+      ...on Promotion {
+        promoInformation {
+          json
+        }
+      }
+    }
+  }
+}

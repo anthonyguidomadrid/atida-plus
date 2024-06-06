@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app.kubernetes.io/component: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+        app.kubernetes.io/component: frontend
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: frontend
+          image: frontend
+          resources:
+            requests:
+              cpu: 500m
+              memory: '300Mi'
+            limits:
+              cpu: 1000m
+              memory: '1Gi'
+          envFrom:
+            - configMapRef:
+                name: frontend
+          livenessProbe:
+            httpGet:
+              path: /api/test
+              port: 3000
+            initialDelaySeconds: 360
+            periodSeconds: 60
+            timeoutSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /api/test
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 3
+          lifecycle:
+            preStop:
+              exec:
+                command: ['/bin/sh', '-c', 'sleep 10']
+          volumeMounts:
+            - mountPath: /app/storage
+              name: json-storage
+      terminationGracePeriodSeconds: 60
+      topologySpreadConstraints:
+        - labelSelector:
+            matchLabels:
+              app: frontend
+          topologyKey: topology.kubernetes.io/zone
+          maxSkew: 1
+          whenUnsatisfiable: ScheduleAnyway
+      imagePullSecrets:
+        - name: gitlab-registry-key
+      volumes:
+        - name: json-storage
+          persistentVolumeClaim:
+            claimName: contentful-webhooks-json-storage

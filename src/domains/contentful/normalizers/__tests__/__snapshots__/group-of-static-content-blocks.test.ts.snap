@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`normalizeGroupOfStaticContentBlocks GraphQL group of static content blocks pulls out the container of content blocks with image - Slider 1`] = `
+Object {
+  "blocks": Array [
+    Object {
+      "backgroundColor": "secondary-dark-sky-blue",
+      "buttonPositionForTablet": "right",
+      "buttonVariant": "primary",
+      "buttonWidthForMobile": "auto",
+      "content": "<p>We&#39;re here to help. Ask about our products or get expert medical advice.</p>",
+      "contentType": "ContentBlockWithImage",
+      "cta": Object {
+        "content": "",
+        "icon": "NavAdvice24",
+        "label": "Chat with an expert",
+        "url": "/contact",
+      },
+      "header": "",
+      "image": Object {
+        "description": "Person looking at a tablet",
+        "title": "Contact image",
+        "type": "image/jpeg",
+        "url": "https://atida.com/adam-winger-iirbrh939yc-unsplash_1.jpg",
+      },
+      "imageOnTheLeft": false,
+      "imageSize": "large",
+      "isSponsoredContent": false,
+      "showDescription": true,
+      "textAlignmentForMobile": "left",
+      "textColor": "primary-white",
+      "textLink": Object {
+        "content": "",
+        "label": "Read our FAQ",
+        "url": "/faq",
+      },
+      "title": "Any questions?",
+      "titleTypography": "heading",
+    },
+    Object {
+      "backgroundColor": "secondary-dark-sky-blue",
+      "buttonPositionForTablet": "right",
+      "buttonVariant": "primary",
+      "buttonWidthForMobile": "auto",
+      "content": "<p>We&#39;re here to help. Ask about our products or get expert medical advice.</p>",
+      "contentType": "ContentBlockWithImage",
+      "cta": Object {
+        "content": "",
+        "icon": "NavAdvice24",
+        "label": "Chat with an expert",
+        "url": "/contact",
+      },
+      "header": "",
+      "image": Object {
+        "description": "Person looking at a tablet",
+        "title": "Contact image",
+        "type": "image/jpeg",
+        "url": "https://atida.com/adam-winger-iirbrh939yc-unsplash_1.jpg",
+      },
+      "imageOnTheLeft": false,
+      "imageSize": "large",
+      "isSponsoredContent": false,
+      "showDescription": true,
+      "textAlignmentForMobile": "left",
+      "textColor": "primary-white",
+      "textLink": Object {
+        "content": "",
+        "label": "Read our FAQ",
+        "url": "/faq",
+      },
+      "title": "Any questions?",
+      "titleTypography": "heading",
+    },
+    Object {
+      "backgroundColor": "secondary-dark-sky-blue",
+      "buttonPositionForTablet": "right",
+      "buttonVariant": "primary",
+      "buttonWidthForMobile": "auto",
+      "content": "<p>We&#39;re here to help. Ask about our products or get expert medical advice.</p>",
+      "contentType": "ContentBlockWithImage",
+      "cta": Object {
+        "content": "",
+        "icon": "NavAdvice24",
+        "label": "Chat with an expert",
+        "url": "/contact",
+      },
+      "header": "",
+      "image": Object {
+        "description": "Person looking at a tablet",
+        "title": "Contact image",
+        "type": "image/jpeg",
+        "url": "https://atida.com/adam-winger-iirbrh939yc-unsplash_1.jpg",
+      },
+      "imageOnTheLeft": false,
+      "imageSize": "large",
+      "isSponsoredContent": false,
+      "showDescription": true,
+      "textAlignmentForMobile": "left",
+      "textColor": "primary-white",
+      "textLink": Object {
+        "content": "",
+        "label": "Read our FAQ",
+        "url": "/faq",
+      },
+      "title": "Any questions?",
+      "titleTypography": "heading",
+    },
+  ],
+  "contentType": "GroupOfStaticContentBlocks",
+  "title": "Frequently asked questionsrs",
+  "type": "Slider",
+}
+`;
+
+exports[`normalizeGroupOfStaticContentBlocks GraphQL group of static content blocks pulls out the container of static content blocks - Accordion 1`] = `
+Object {
+  "blocks": Array [
+    Object {
+      "content": "<h2>Nam venenatis</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et massa convallis, feugiat odio eget, mollis risus. Nunc a efficitur orci. Nam lacinia commodo ipsum, non blandit velit euismod in. Aliquam non dui nec tortor tincidunt consequat vel a massa. Suspendisse viverra luctus euismod. Donec vitae posuere leo. Ut posuere elementum libero eu fringilla. Suspendisse at pulvinar risus. Pellentesque eget bibendum dui, in feugiat odio. Maecenas fermentum ipsum sed tincidunt posuere.</p>",
+      "contentType": "StaticContentBlock",
+      "title": "How do I earn Atida cash rewards?",
+    },
+    Object {
+      "content": "<h2>Nam venenatis</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et massa convallis, feugiat odio eget, mollis risus. Nunc a efficitur orci. Nam lacinia commodo ipsum, non blandit velit euismod in. Aliquam non dui nec tortor tincidunt consequat vel a massa. Suspendisse viverra luctus euismod. Donec vitae posuere leo. Ut posuere elementum libero eu fringilla. Suspendisse at pulvinar risus. Pellentesque eget bibendum dui, in feugiat odio. Maecenas fermentum ipsum sed tincidunt posuere.</p>",
+      "contentType": "StaticContentBlock",
+      "title": "What are Atida cash rewards??",
+    },
+  ],
+  "contentType": "GroupOfStaticContentBlocks",
+  "title": "Frequently asked questionsrs",
+  "type": "Accordion",
+}
+`;
+
+exports[`normalizeGroupOfStaticContentBlocks GraphQL group of static content blocks pulls out the container of static content blocks - Bullet points 1`] = `
+Object {
+  "blocks": Array [
+    Object {
+      "content": "<h2>Nam venenatis</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et massa convallis, feugiat odio eget, mollis risus. Nunc a efficitur orci. Nam lacinia commodo ipsum, non blandit velit euismod in. Aliquam non dui nec tortor tincidunt consequat vel a massa. Suspendisse viverra luctus euismod. Donec vitae posuere leo. Ut posuere elementum libero eu fringilla. Suspendisse at pulvinar risus. Pellentesque eget bibendum dui, in feugiat odio. Maecenas fermentum ipsum sed tincidunt posuere.</p>",
+      "contentType": "StaticContentBlock",
+      "icon": "iconReference",
+      "title": "How do I earn Atida cash rewards?",
+    },
+    Object {
+      "content": "<h2>Nam venenatis</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et massa convallis, feugiat odio eget, mollis risus. Nunc a efficitur orci. Nam lacinia commodo ipsum, non blandit velit euismod in. Aliquam non dui nec tortor tincidunt consequat vel a massa. Suspendisse viverra luctus euismod. Donec vitae posuere leo. Ut posuere elementum libero eu fringilla. Suspendisse at pulvinar risus. Pellentesque eget bibendum dui, in feugiat odio. Maecenas fermentum ipsum sed tincidunt posuere.</p>",
+      "contentType": "StaticContentBlock",
+      "icon": "iconReference",
+      "title": "What are Atida cash rewards??",
+    },
+    Object {
+      "content": "<h2>Nam venenatis</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et massa convallis, feugiat odio eget, mollis risus. Nunc a efficitur orci. Nam lacinia commodo ipsum, non blandit velit euismod in. Aliquam non dui nec tortor tincidunt consequat vel a massa. Suspendisse viverra luctus euismod. Donec vitae posuere leo. Ut posuere elementum libero eu fringilla. Suspendisse at pulvinar risus. Pellentesque eget bibendum dui, in feugiat odio. Maecenas fermentum ipsum sed tincidunt posuere.</p>",
+      "contentType": "StaticContentBlock",
+      "icon": "iconReference",
+      "title": "What are Atida cash rewards??",
+    },
+  ],
+  "contentType": "GroupOfStaticContentBlocks",
+  "title": "Frequently asked questionsrs",
+  "type": "Bullet points",
+}
+`;
+
+exports[`normalizeGroupOfStaticContentBlocks GraphQL null blocks does not error 1`] = `
+Object {
+  "contentType": "GroupOfStaticContentBlocks",
+  "title": "Frequently asked questions",
+  "type": "",
+}
+`;

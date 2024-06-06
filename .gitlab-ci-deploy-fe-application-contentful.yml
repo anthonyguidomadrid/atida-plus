@@ -1,0 +1,102 @@
+## ${ENV_LOCAL_CONTENTFUL} is used to pass the .env specific for DE or ES
+
+include:
+  - local: ".gitlab-ci-deploy-node-and-yarn-dep.yml"
+
+.contentful-backup:
+  extends:
+    - .node
+  script:
+    - ENV_FILE_CONTENTFUL="$ENV_LOCAL_CONTENTFUL"
+    - echo -e ${ENV_FILE_CONTENTFUL} > ${CI_PROJECT_DIR}/contentful-scripts/.env.local
+    - cd ${CI_PROJECT_DIR}/contentful-scripts/
+    - node --version
+    - npm -version
+    - npm install
+    - node scripts/export-env.js --from "${ENVIRONMENT}" --verbose
+    - cd ${CI_PROJECT_DIR}/
+  artifacts:
+    expire_in: 1 month
+    when: always
+    paths:
+      - contentful-scripts/export/${ENVIRONMENT}/*.json
+
+.contentful-migrations:
+  extends:
+    - .node
+  script:
+    - ENV_FILE_CONTENTFUL="$ENV_LOCAL_CONTENTFUL"
+    - echo -e ${ENV_FILE_CONTENTFUL} > ${CI_PROJECT_DIR}/contentful-scripts/.env.local
+    - cd ${CI_PROJECT_DIR}/contentful-scripts/
+    - node --version
+    - npm -version
+    - npm install
+    - node scripts/apply-migrations.js --to "${ENVIRONMENT}" --force-yes
+    - node scripts/fixture-importer.js --to "${ENVIRONMENT}"
+    - cd ${CI_PROJECT_DIR}/
+
+.contentful-prepare-master-prod:
+  extends:
+    - .node
+  script:
+    - LATEST_RELEASE=$(git describe --abbrev=0 --tags)
+    - ENV_FILE_CONTENTFUL="$ENV_LOCAL_CONTENTFUL"
+    - echo -e ${ENV_FILE_CONTENTFUL} > ${CI_PROJECT_DIR}/contentful-scripts/.env.local
+    - cd ${CI_PROJECT_DIR}/contentful-scripts/
+    - node --version
+    - npm -version
+    - npm install
+    - node scripts/release.js --duplicate-master --to "release-$LATEST_RELEASE"
+    - sleep 10
+    - node scripts/apply-migrations.js --to "release-$LATEST_RELEASE" --force-yes
+    - node scripts/fixture-importer.js --to "release-$LATEST_RELEASE"
+    - cd ${CI_PROJECT_DIR}/
+
+.contentful-link-release-prod:
+  extends:
+    - .node
+  script:
+    - LATEST_RELEASE=$(git describe --abbrev=0 --tags)
+    - PREVIOUS_RELEASE=$(git tag --sort=-committerdate -l|tail -n +2|head -1)
+    - ENV_FILE_CONTENTFUL="$ENV_LOCAL_CONTENTFUL"
+    - echo -e ${ENV_FILE_CONTENTFUL} > ${CI_PROJECT_DIR}/contentful-scripts/.env.local
+    - cd ${CI_PROJECT_DIR}/contentful-scripts/
+    - node --version
+    - npm -version
+    - npm install
+    - node scripts/release.js --link-master --to "release-$LATEST_RELEASE" --delete-old-releases --force-yes
+    - node scripts/release.js --sync-scheduling --from "release-$PREVIOUS_RELEASE"
+    - node scripts/release.js --sync-current-master --from "release-$PREVIOUS_RELEASE"
+    - cd ${CI_PROJECT_DIR}/
+
+.contentful-sync-to-uat-validate:
+  extends:
+    - .node
+  script:
+    - ENV_FILE_CONTENTFUL="$ENV_LOCAL_CONTENTFUL"
+    - echo -e ${ENV_FILE_CONTENTFUL} > ${CI_PROJECT_DIR}/contentful-scripts/.env.local
+    - cd ${CI_PROJECT_DIR}/contentful-scripts/
+    - node --version
+    - npm -version
+    - npm install
+    - node scripts/sync-env.js --from "master" --to "uat" --verbose --include-assets --only-published --dry-run
+    - cd ${CI_PROJECT_DIR}/
+
+.contentful-sync-to-uat-run:
+  extends:
+    - .node
+  script:
+    - ENV_FILE_CONTENTFUL="$ENV_LOCAL_CONTENTFUL"
+    - echo -e ${ENV_FILE_CONTENTFUL} > ${CI_PROJECT_DIR}/contentful-scripts/.env.local
+    - cd ${CI_PROJECT_DIR}/contentful-scripts/
+    - node --version
+    - npm -version
+    - npm install
+    - node scripts/export-env.js --from "uat" --verbose
+    - node scripts/sync-env.js --from "master" --to "uat" --verbose 2 --include-assets --only-published
+    - cd ${CI_PROJECT_DIR}/
+  artifacts:
+    expire_in: 1 month
+    when: always
+    paths:
+      - contentful-scripts/export/uat/*.json

@@ -1,0 +1,1 @@
+Optimize FE bundle size by setting "sideEffects" to false

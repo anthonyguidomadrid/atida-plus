@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainSectionHeader renders the HeroHeader with a HeroBanner 1`] = `
+<div>
+  <header
+    class="bg-category-beauty"
+    data-testid="mainSectionHeader"
+  >
+    <div
+      class="container container-fixed mx-auto sm:relative"
+    >
+      <div
+        class="relative"
+        data-testid="heroHeader"
+      >
+        <button
+          class="button button--back absolute z-2 ml-3 sm:ml-6 lg:ml-8 top-2 sm:top-3"
+          data-testid="popBackButton"
+          type="button"
+        >
+          <svg
+            class="button__icon--before icon-16"
+            role="presentation"
+          />
+          <span
+            class=""
+          >
+            shared.back
+          </span>
+        </button>
+        <div
+          class="w-full flex flex-col gap-5 sm:gap-6 md:gap-7 lg:gap-9"
+          data-testid="contentBlocksLayout"
+        >
+          <div
+            data-testid="heroBanner"
+          />
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+`;
+
+exports[`MainSectionHeader renders the PromotionHeader 1`] = `
+<div>
+  <header
+    class="bg-category-beauty"
+    data-testid="mainSectionHeader"
+  >
+    <div
+      class="container container-fixed mx-auto sm:relative"
+    >
+      <div
+        class="flex flex-col sm:flex-row justify-between h-full"
+        data-testid="promotionHeader"
+      >
+        <div
+          class="w-full sm:col-start-1 sm:col-end-6 md:col-end-7 py-2 sm:py-3"
+        >
+          <button
+            class="button button--back mb-3 md:mb-4"
+            data-testid="promotionBackButton"
+            type="button"
+          >
+            <svg
+              class="button__icon--before icon-16"
+              role="presentation"
+            />
+            <span
+              class=""
+            >
+              shared.back
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+`;
+
+exports[`MainSectionHeader renders the SimpleHeader 1`] = `
+<div>
+  <header
+    class="bg-category-beauty"
+    data-testid="mainSectionHeader"
+  >
+    <div
+      class="container container-fixed mx-auto sm:relative"
+    >
+      <div
+        class="flex flex-col sm:flex-row justify-between h-full sm:h-22.5 md:h-24.5 lg:h-28.5"
+        data-testid="simpleHeader"
+      >
+        <div
+          class="sm:w-full"
+        >
+          <div
+            class="flex pt-2 sm:pt-3 sm:absolute z-10"
+          >
+            <button
+              class="button button--back p-0 justify-center w-5 h-5 w-fit h-fit pt-3px mr-0"
+              data-testid="popBackButton"
+              type="button"
+            >
+              <svg
+                class="button__icon--before button__icon--only icon-16 align-middle mr-0"
+                role="presentation"
+              />
+            </button>
+          </div>
+          <h1
+            class="text-6xl lg:text-8xl line-clamp-2 my-2 sm:my-4 lg:mt-5 sm:absolute z-10 sm:top-5.5 "
+          />
+        </div>
+      </div>
+    </div>
+  </header>
+</div>
+`;

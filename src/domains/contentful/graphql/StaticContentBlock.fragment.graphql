@@ -1,0 +1,10 @@
+fragment staticContentBlock on StaticContentBlock {
+  title
+  content {
+    json
+  }
+  icon {
+    __typename
+    ref
+  }
+}

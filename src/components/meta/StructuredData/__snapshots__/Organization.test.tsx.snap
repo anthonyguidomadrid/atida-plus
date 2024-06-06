@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Organization renders nothing when organization data is not found 1`] = `null`;
+
+exports[`Organization renders script tag with json-ld data 1`] = `
+<script
+  type="application/ld+json"
+>
+  {"@context":"https://schema.org","@type":"Organization","name":"Atida","description":"Farmácia Online de Confiança","telephone":"+34 967115501","email":"https://support.atida.com/pt-PT/support/home","sameAs":["https://twitter.com/atida_pt,","https://www.facebook.com/AtidaPT/","https://www.instagram.com/atida_pt/"],"image":"https://www.atida.com/pt-pt/blog/wp-content/uploads/2021/08/atida-mifarma-logo.png","url":"somehost.com/en-gb","address":{"@type":"PostalAddress","streetAddress":"10 Downing Street","addressLocality":"London","addressRegion":"London","postalCode":"SW1A 2AA","addressCountry":"UK"}}
+</script>
+`;

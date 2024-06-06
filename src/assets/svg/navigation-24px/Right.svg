@@ -1,0 +1,12 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Size=24px, Type=Right, Menu=Other">
+<g id="Frame" clip-path="url(#clip0)">
+<path id="Vector" d="M3 11H18.6L13.3 5.7C12.9 5.3 12.9 4.7 13.3 4.3C13.7 3.9 14.3 3.9 14.7 4.3L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.7 19.7C14.5 19.9 14.3 20 14 20C13.7 20 13.5 19.9 13.3 19.7C12.9 19.3 12.9 18.7 13.3 18.3L18.6 13H3C2.4 13 2 12.6 2 12C2 11.4 2.4 11 3 11Z" fill="#1A1D32"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0">
+<rect width="20" height="16" fill="white" transform="matrix(-1 0 0 1 22 4)"/>
+</clipPath>
+</defs>
+</svg>

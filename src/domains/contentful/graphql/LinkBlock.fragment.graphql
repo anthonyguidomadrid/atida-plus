@@ -1,0 +1,13 @@
+fragment linkBlock on LinkBlock {
+  __typename
+  title
+  isCta
+  link {
+    __typename
+    label
+    url
+    icon {
+      ref
+    }
+  }
+}

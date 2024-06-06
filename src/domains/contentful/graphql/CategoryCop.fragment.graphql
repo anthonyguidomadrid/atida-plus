@@ -1,0 +1,118 @@
+fragment categoryCop on CategoryCop {
+  __typename
+  title
+  linkedCategory {
+    id
+    title
+    subcategoriesCollection(limit: 25) {
+      items {
+        id
+        title
+        level
+        linkedFrom(allowedLocales: $allLocales) {
+          pageCollection(limit: 1, locale: $locale) {
+            items {
+              slug
+            }
+          }
+        }
+      }
+    }
+    image {
+      __typename
+      title
+      description
+      url
+      contentType
+    }
+    color {
+      __typename
+      ref
+    }
+    categoryPageSlug: linkedFrom(allowedLocales: $allLocales) {
+      pageCollection(limit: 1, locale: $locale) {
+        items {
+          slug
+        }
+      }
+    }
+  }
+  linkedPromotionsCollection(limit: 4) {
+    __typename
+    items {
+      # if I use the promotion fragment here ( ...promotion), I get an error:
+      # errors: [
+      #      "There can be only one fragment named \"promotion\".",
+      #      "There can be only one fragment named \"promo\"."
+      #    ]
+      # looked into the issue, but wasn't able to find a simple, working solution/workaround to the problem, so for now
+      # I'm going to duplicate the promotion fragment
+      # https://github.com/dotansimha/graphql-code-generator/issues/3063
+      ... on Promotion {
+        __typename
+        sys {
+          firstPublishedAt
+        }
+        title
+        id
+        itemsToFilterBy
+        description {
+          __typename
+          json
+        }
+        promoInformation {
+          __typename
+          json
+        }
+        teaserDescription
+        color {
+          __typename
+          ref
+        }
+        image {
+          __typename
+          url
+        }
+        teaserImage {
+          __typename
+          url
+        }
+        categoriesCollection(limit: 5) {
+          items {
+            __typename
+            id
+          }
+        }
+        isContentWithImage: teaserType
+        validFrom
+        validTo
+        labelsCollection(limit: 2) {
+          items {
+            __typename
+            ... on Translation {
+              key
+              value
+            }
+            ... on TranslationInfoLabel {
+              key: labelKey
+              value: title
+            }
+          }
+        }
+        url: linkedFrom(allowedLocales: $allLocales) {
+          pageCollection(limit: 35, locale: $locale) {
+            items {
+              slug
+              referencedContent {
+                __typename
+                ... on Promotion {
+                  id
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

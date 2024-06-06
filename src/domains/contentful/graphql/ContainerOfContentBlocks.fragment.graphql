@@ -1,0 +1,68 @@
+fragment containerOfContentBlocks on ContainerOfContentBlocks {
+  title
+  showTitle
+  hasMargin
+  contentCollection(limit: 2) {
+    items {
+      __typename
+      ... on Promotion {
+        title
+        id
+        sponsored
+        description {
+          __typename
+          json
+        }
+        teaserDescription
+        color {
+          __typename
+          ref
+        }
+        image {
+          __typename
+          url
+        }
+        teaserImage {
+          __typename
+          url
+        }
+        categoriesCollection(limit: 5) {
+          items {
+            __typename
+            id
+          }
+        }
+        labelsCollection(limit: 2) {
+          items {
+            __typename
+            ... on Translation {
+              key
+              value
+            }
+            ... on TranslationInfoLabel {
+              key: labelKey
+              value: title
+            }
+          }
+        }
+        isContentWithImage: teaserType
+        validFrom
+        validTo
+        url: linkedFrom(allowedLocales: $allLocales) {
+          pageCollection(limit: 35, locale: $locale) {
+            items {
+              slug
+              referencedContent {
+                __typename
+                ... on Promotion {
+                  id
+                }
+              }
+            }
+          }
+        }
+      }
+      ...marketingTeaser
+    }
+  }
+}

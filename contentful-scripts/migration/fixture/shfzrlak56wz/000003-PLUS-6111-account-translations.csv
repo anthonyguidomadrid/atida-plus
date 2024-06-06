@@ -1,0 +1,10 @@
+translation.key,translation.value.en-GB,translation.value.de-DE,translation.value.de-AT,translation.complete,sys.tags
+form.field.birth-date.label,Date of birth*,Geburtsdatum*,Geburtsdatum*,true,country-de|country-at
+form.field.birth-date.sub-label,Minimum age needs to be 18 year or older,Das Mindestalter muss 18 Jahre oder älter sein,Das Mindestalter muss 18 Jahre oder älter sein,true,country-de|country-at
+account.form-field.date-of-birth-required,Please enter your date of birth to proceed,"Bitte geben Sie Ihr Geburtsdatum ein, um fortzufahren","Bitte geben Sie Ihr Geburtsdatum ein, um fortzufahren",true,country-de|country-at
+account.form-field.date-of-birth-format,Please enter a valid date of birth,"Bitte geben Sie ein gültiges Geburtsdatum ein","Bitte geben Sie ein gültiges Geburtsdatum ein",true,country-de|country-at
+account.form-field.email-placeholder,Your email address,deine Emailadresse,deine Emailadresse,true,country-de|country-at
+account.form-field.password-placeholder,Create a password,Erstellen sie ein Passwort,Erstellen sie ein Passwort,true,country-de|country-at
+account.form-field.first-name-placeholder,First name,Vorname,Vorname,true,country-de|country-at
+account.form-field.last-name-placeholder,Last name,Nachname,Nachname,true,country-de|country-at
+account.form-field.date-of-birth-placeholder,dd-mm-yyyy,dd-mm-yyyy,dd-mm-yyyy,true,country-de|country-at

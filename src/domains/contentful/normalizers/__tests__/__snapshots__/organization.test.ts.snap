@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`normalizeOrganization normalizes the data 1`] = `
+Object {
+  "description": "Online pharmacy",
+  "email": "hello@atida.com",
+  "id": "atida",
+  "imageUrl": "logo.png",
+  "name": "Atida",
+  "sameAs": Array [
+    "https://www.facebook.com",
+    "https://www.twitter.com",
+  ],
+  "telephone": "123456789",
+}
+`;

@@ -1,0 +1,5 @@
+translation.key,translation.value.en-GB,translation.value.es-ES,translation.value.pt-PT,translation.complete,sys.tags
+account.form-field.email-placeholder,Your email address,Su dirección de correo electrónico,Seu endereço de email,true,country-es|country-pt
+account.form-field.password-placeholder,Create a password,Crear una contraseña,Criar uma senha,true,country-es|country-pt
+account.form-field.first-name-placeholder,First name,Nombre,Primeiro nome,true,country-es|country-pt
+account.form-field.last-name-placeholder,Last name,Apellido,Último nome,true,country-es|country-pt

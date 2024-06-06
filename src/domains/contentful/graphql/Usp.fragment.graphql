@@ -1,0 +1,7 @@
+fragment usp on Usp {
+  icon {
+    __typename
+    ref
+  }
+  text
+}

@@ -1,0 +1,3 @@
+translation.key,translation.value.en-GB,translation.value.de-DE,translation.value.de-AT,translation.complete,sys.tags
+form.field.birth-date.label.no-asterisk,Date of birth,Geburtsdatum,Geburtsdatum,true,country-de|country-at
+form.field.phone-number.label.no-asterisk,Phone number,Telefonnummer,Telefonnummer,true,country-de|country-at

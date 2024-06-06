@@ -1,0 +1,15 @@
+query exponeaRecommendationsCollectionQuery($locale: String!, $type: String!) {
+  exponeaRecommendationCollection(
+    locale: $locale
+    where: { type_contains: $type }
+  ) {
+    items {
+      title
+      altTitle
+      id
+      type
+      isSlider
+      quantity
+    }
+  }
+}

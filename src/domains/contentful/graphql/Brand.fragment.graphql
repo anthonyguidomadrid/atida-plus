@@ -1,0 +1,16 @@
+fragment brandId on Brand {
+  id
+}
+
+fragment brand on Brand {
+  title
+  id
+  image {
+    __typename
+    url
+  }
+  logoImage {
+    __typename
+    url
+  }
+}

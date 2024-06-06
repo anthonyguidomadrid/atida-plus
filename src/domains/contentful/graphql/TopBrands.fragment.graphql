@@ -1,0 +1,18 @@
+fragment topBrands on TopBrands {
+	title
+  brandsCollection(limit: 10) {
+    items {
+      title
+      url: linkedFrom(allowedLocales: $allLocales) {
+        pageCollection(limit: 2, locale: $locale) {
+          items {
+            slug
+          }
+        }
+      }
+      logoImage {
+        url
+      }
+    }
+  }
+}

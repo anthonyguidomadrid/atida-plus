@@ -1,0 +1,72 @@
+fragment groupOfStaticContentBlocks on GroupOfStaticContentBlocks {
+  __typename
+  title
+  staticContentBlocksCollection(limit:20) {
+    items {
+      ... on StaticContentBlock {
+        __typename
+        title
+        content {
+          json
+        }
+        icon {
+          __typename
+          ref
+        }
+      }
+      ... on ContentBlockWithImage {
+        __typename
+        title
+        header
+        sponsored
+        image {
+          __typename
+          title
+          description
+          url
+          contentType
+        }
+        imageLeft
+        content {
+          __typename
+          json
+        }
+        cta {
+          __typename
+          label
+          url
+          icon {
+            __typename
+            ref
+          }
+          content {
+            __typename
+            json
+          }
+        }
+        textLink {
+          __typename
+          label
+          url
+          icon {
+            __typename
+            ref
+          }
+          content {
+            __typename
+            json
+          }
+        }
+        bgColor {
+          __typename
+          ref
+        }
+        textColor {
+          __typename
+          ref
+        }
+            }
+          }
+        }
+        type
+}

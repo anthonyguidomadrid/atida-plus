@@ -1,0 +1,145 @@
+.MR-Widget.MR-Widget-Responsive .MRW-ButtonContainer button {
+  background-color: #1a1d32 !important;
+  border: 0px !important;
+  -moz-border-radius: 0px !important;
+  -webkit-border-radius: 0px !important;
+  border-radius: 0px;
+}
+
+.MR-Widget .MRW-BtGo,
+.PR-Name,
+.PR-Hours,
+.PR-List-Item,
+.MRW-Container label,
+.MRW-Container input {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji' !important;
+}
+
+.MR-Widget .MRW-BtGo {
+  border: 0px !important;
+  background: #000 !important;
+  border-radius: 0px !important;
+}
+
+.MRW-LockerModal {
+  display: none !important;
+}
+
+.MR-Widget .PR-Name {
+  color: #000 !important;
+  font-weight: 700;
+}
+
+.PR-List-Item {
+  border-left: solid 8px #d6d5d2 !important;
+  text-align: left;
+}
+
+.PR-Selected {
+  border-left: solid 8px #1a1d32 !important;
+  background-color: white !important;
+}
+
+.PR-List-Item:hover {
+  background-color: #f6f6f3 !important;
+}
+
+.MRW-Container label {
+  font-weight: bold;
+  margin-right: 2px;
+  width: auto !important;
+}
+
+.MRW-CountryContainer {
+  display: none !important;
+}
+
+.MRW-Line input {
+  width: 120px !important;
+}
+
+.MRW-BtGo {
+  width: 144px !important;
+  color: white !important;
+  font-size: 16px !important;
+}
+
+.MRW-BtGeoGo {
+  margin-left: 6px !important;
+  background-color: #1a1d32 !important;
+  opacity: 100% !important;
+  border: 0px !important;
+  border-radius: 0px !important;
+}
+
+.MRW-Title,
+.Tabs-Btns,
+.gm-style-mtc {
+  display: none !important;
+}
+
+.MRW-RList {
+  max-height: 100% !important;
+}
+
+.gm-style-iw.gm-style-iw-c {
+  min-width: 2.5% !important;
+}
+
+.gm-ui-hover-effect {
+  outline: none !important;
+}
+
+@media screen and (max-width: 800px) {
+  .MRW-ButtonContainer,
+  .MRW-CPContainer {
+    display: block !important;
+    grid-column-start: 3 !important;
+    grid-column-end: 3 !important;
+  }
+  .MRW-CityContainer {
+    display: none !important;
+  }
+  .MRW-Line {
+    text-align: right !important;
+    display: grid !important;
+    grid-template-columns: 2fr 1fr 2fr !important;
+  }
+  .MRW-BtGo {
+    transform: translateX(4px) !important;
+  }
+}
+
+@media screen and (min-width: 801px) {
+  .MRW-Line {
+    display: flex !important;
+    justify-content: space-between !important;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .MRW-ButtonCircle.MRW-ShowList {
+    background-color: #1a1d32 !important;
+    border: #1a1d32 !important;
+    z-index: 1100 !important;
+    opacity: 100% !important;
+    transform: translateY(-450%) !important;
+  }
+  .MRW-RList:not(.Hide) {
+    width: 100% !important;
+  }
+  .MRW-BtGeoGo {
+    z-index: 1100 !important;
+  }
+  .MRW-Map {
+    max-height: 99.9% !important;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-height: 610px) {
+  .MR-Widget-Responsive {
+    max-height: 400px !important;
+  }
+}

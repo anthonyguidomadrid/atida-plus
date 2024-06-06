@@ -1,0 +1,14 @@
+fragment menu on MenuCollection {
+  __typename
+  items {
+    __typename
+    title
+    id
+    itemsCollection {
+      __typename
+      items {
+        ...menuItem
+      }
+    }
+  }
+}

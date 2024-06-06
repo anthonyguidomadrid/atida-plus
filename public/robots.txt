@@ -1,0 +1,68 @@
+Sitemap: https://www.atida.com/pt-pt/sitemap-index.xml
+Sitemap: https://www.atida.com/es-es/sitemap-index-es.xml
+Sitemap: https://www.atida.com/es-es/blog/sitemap_index.xml
+Sitemap: https://www.atida.com/pt-pt/blog/sitemap_index.xml
+
+# Disallow all user agents.
+
+User-agent: Googlebot-Image
+Disallow:
+
+User-agent: *
+Disallow: /*/checkout
+Disallow: /*/confirmation
+Disallow: /*/basket
+Disallow: /*/login
+Disallow: /*/create-account
+Disallow: /*/set-new-password
+Disallow: /*/password-forgotten
+Disallow: /*/account
+Disallow: /*?search=
+
+## Parameters & filters
+
+Disallow:*?brand=
+Disallow:*?categories_lvl0=
+Disallow:*?categories_lvl1=
+Disallow:*&categories_lvl1=
+Disallow:*?categories_lvl2=
+Disallow:*&categories_lvl2=
+Disallow:*?format=
+Disallow:*&hasPromo=
+Disallow:*?priceRange=
+Disallow:*?age_group=
+Disallow:*?skin_type=
+Disallow:*?hair_type=
+Disallow:*?hair_color=
+Disallow:*?taste=
+Disallow:*?color=
+Disallow:*?product_characteristics=
+Disallow:*?size=
+Disallow:*?spf=
+Disallow:*?absorption_level=
+Disallow:*?occasion=
+Disallow:*?vitamins=
+Disallow:*?minerals=
+Disallow:*?form_of_use=
+Disallow:*?glass=
+Disallow:*?warnings=
+Disallow:*?vitamins_multiselect=
+Disallow:*?minerals_multiselect=
+Disallow:*?taste_multiselect=
+Disallow:*?skin_type_multiselect=
+Disallow:*?product_features_list_multiselect=
+Disallow:*?hair_type_multiselect
+Disallow:*?fq=
+Disallow:*?limit=
+Disallow:*?yoReviewsPage=
+Disallow:*?___SID=
+Disallow:*?new=
+Disallow:*?dir=
+Disallow:*?manufacturer=
+Disallow:*?noforce=
+Disallow:*?themecustomizer=
+Disallow:*?mode=
+Disallow:*?queryID=
+Disallow:*?__cn_tracker=
+Disallow:*?onSale=
+Disallow:*?fee=

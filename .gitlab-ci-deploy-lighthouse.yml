@@ -1,0 +1,24 @@
+include:
+  - local: ".gitlab-ci-deploy-node-and-yarn-dep.yml"
+
+.lighthouse:
+  image: cypress/browsers:node14.17.0-chrome91-ff89
+  extends:
+    - .node
+  before_script:
+    - export PATH="$(yarn global bin):$PATH"
+    - cp $envLocal ${CI_PROJECT_DIR}/.env.local
+    - yarn build
+    - npm install -g @lhci/cli@0.8.2
+  script:
+    - lhci autorun --upload.token="${LHCI_BUILD_TOKEN_EKS_SHARED}" --collect.settings.chromeFlags="--no-sandbox --disable-dev-shm-usage" --max-wait-for-load=120000 || echo "LHCI failed."
+
+.lighthouse-ci:
+  extends:
+    - .lighthouse
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^(develop$|master$)/
+      when: never
+    - when: manual
+      allow_failure: true
+

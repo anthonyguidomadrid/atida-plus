@@ -1,0 +1,220 @@
+stages:
+  - setup
+  - test
+
+include:
+  - local: ".gitlab-ci-deploy-node-and-yarn-dep.yml"
+
+build-dependencies:
+  stage: setup
+  extends:
+    - .yarn-deps
+
+.cypress-e2e-chrome:
+  stage: test
+  needs: [build-dependencies]
+  image: cypress/browsers:node14.7.0-chrome84
+  extends:
+    - .node
+  artifacts:
+    expire_in: 1 week
+    when: always
+    paths:
+      - tests/cypress/screenshots
+      - tests/cypress/videos
+    reports:
+      junit:
+        - tests/cypress/results/results-*.xml
+
+.cypress-e2e-chrome:dev:
+  extends:
+    - .cypress-e2e-chrome
+  before_script:
+    - export PATH="$(yarn global bin):$PATH"
+    - cp $cypressAuthJson ${CI_PROJECT_DIR}/tests/cypress/fixtures/auth.json
+    - cp $devDatabaseEnvironmentJson ${CI_PROJECT_DIR}/tests/cypress/config/dev.json
+  script:
+    - yarn run cypress --e2e
+
+.cypress:dev-mr:
+  extends:
+    - .cypress-e2e-chrome:dev
+  rules:
+    - if: $DEPLOY
+      when: never
+    - if: $CI_COMMIT_BRANCH =~ /^(develop$|master$|expedite\/|release\/)/
+      when: never
+    - when: manual
+      allow_failure: true
+
+cypress:dev-mr-account-pt:
+  extends: .cypress:dev-mr
+  variables:
+    CYPRESS_TEAM: account
+    CYPRESS_locale: pt
+
+cypress:dev-mr-account-es:
+  extends: .cypress:dev-mr
+  variables:
+    CYPRESS_TEAM: account
+    CYPRESS_locale: es
+
+cypress:dev-mr-basket-checkout-pt:
+  extends: .cypress:dev-mr
+  variables:
+    CYPRESS_TEAM: basket-checkout
+    CYPRESS_locale: pt
+
+cypress:dev-mr-basket-checkout-es:
+  extends: .cypress:dev-mr
+  variables:
+    CYPRESS_TEAM: basket-checkout
+    CYPRESS_locale: es
+
+cypress:dev-mr-core-shopping-pt:
+  extends: .cypress:dev-mr
+  variables:
+    CYPRESS_TEAM: core-shopping
+    CYPRESS_locale: pt
+
+cypress:dev-mr-core-shopping-es:
+  extends: .cypress:dev-mr
+  variables:
+    CYPRESS_TEAM: core-shopping
+    CYPRESS_locale: es
+
+cypress:dev-mr-nav-search-ranking-pt:
+  extends: .cypress:dev-mr
+  variables:
+    CYPRESS_TEAM: nav-search-ranking
+    CYPRESS_locale: pt
+
+cypress:dev-mr-nav-search-ranking-es:
+  extends: .cypress:dev-mr
+  variables:
+    CYPRESS_TEAM: nav-search-ranking
+    CYPRESS_locale: es
+
+.cypress:dev-deploy:
+  extends:
+    - .cypress-e2e-chrome:dev
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+      when: on_success
+      allow_failure: true
+    - when: never
+  variables:
+    CYPRESS_INCLUDE_TAGS: SMOKE
+
+cypress:dev-deploy-account-pt:
+  extends: .cypress:dev-deploy
+  variables:
+    CYPRESS_TEAM: account
+    CYPRESS_locale: pt
+
+cypress:dev-deploy-account-es:
+  extends: .cypress:dev-deploy
+  variables:
+    CYPRESS_TEAM: account
+    CYPRESS_locale: es
+
+cypress:dev-deploy-basket-checkout-pt:
+  extends: .cypress:dev-deploy
+  variables:
+    CYPRESS_TEAM: basket-checkout
+    CYPRESS_locale: pt
+
+cypress:dev-deploy-basket-checkout-es:
+  extends: .cypress:dev-deploy
+  variables:
+    CYPRESS_TEAM: basket-checkout
+    CYPRESS_locale: es
+
+cypress:dev-deploy-core-shopping-pt:
+  extends: .cypress:dev-deploy
+  variables:
+    CYPRESS_TEAM: core-shopping
+    CYPRESS_locale: pt
+
+cypress:dev-deploy-core-shopping-es:
+  extends: .cypress:dev-deploy
+  variables:
+    CYPRESS_TEAM: core-shopping
+    CYPRESS_locale: es
+
+cypress:dev-deploy-nav-search-ranking-pt:
+  extends: .cypress:dev-deploy
+  variables:
+    CYPRESS_TEAM: nav-search-ranking
+    CYPRESS_locale: pt
+
+cypress:dev-deploy-nav-search-ranking-es:
+  extends: .cypress:dev-deploy
+  variables:
+    CYPRESS_TEAM: nav-search-ranking
+    CYPRESS_locale: es
+
+.cypress:uat:
+  extends:
+    - .cypress-e2e-chrome
+  before_script:
+    - export PATH="$(yarn global bin):$PATH"
+    - cp $cypressAuthJson ${CI_PROJECT_DIR}/tests/cypress/fixtures/auth.json
+    - cp $uatDatabaseEnvironmentJson ${CI_PROJECT_DIR}/tests/cypress/config/uat.json
+  script:
+    - yarn run cypress:uat --browser chrome
+  variables:
+    CYPRESS_INCLUDE_TAGS: SMOKE
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^(release\/)/
+      when: manual
+      allow_failure: true
+    - when: never
+
+cypress:uat-account-pt:
+  extends: .cypress:uat
+  variables:
+    CYPRESS_TEAM: account
+    CYPRESS_locale: pt
+
+cypress:uat-account-es:
+  extends: .cypress:uat
+  variables:
+    CYPRESS_TEAM: account
+    CYPRESS_locale: es
+
+cypress:uat-basket-checkout-pt:
+  extends: .cypress:uat
+  variables:
+    CYPRESS_TEAM: basket-checkout
+    CYPRESS_locale: pt
+
+cypress:uat-basket-checkout-es:
+  extends: .cypress:uat
+  variables:
+    CYPRESS_TEAM: basket-checkout
+    CYPRESS_locale: es
+
+cypress:uat-core-shopping-pt:
+  extends: .cypress:uat
+  variables:
+    CYPRESS_TEAM: core-shopping
+    CYPRESS_locale: pt
+
+cypress:uat-core-shopping-es:
+  extends: .cypress:uat
+  variables:
+    CYPRESS_TEAM: core-shopping
+    CYPRESS_locale: es
+
+cypress:uat-nav-search-ranking-pt:
+  extends: .cypress:uat
+  variables:
+    CYPRESS_TEAM: nav-search-ranking
+    CYPRESS_locale: pt
+
+cypress:uat-nav-search-ranking-es:
+  extends: .cypress:uat
+  variables:
+    CYPRESS_TEAM: nav-search-ranking
+    CYPRESS_locale: es

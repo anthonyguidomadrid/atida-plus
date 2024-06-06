@@ -1,0 +1,8 @@
+.env.local
+.env.local*
+.temp/*
+export/*
+node_modules/*
+scripts/sync-master.db
+scripts/sync-env.db
+scripts/sync-space.db

@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectField selects an option in a single-option input 1`] = `
+<form
+  data-testid="form"
+>
+  <label
+    for="selected_options"
+  >
+    Options
+  </label>
+  <div
+    class="react-select-wrapper css-b62m3t-container"
+  >
+    <span
+      class="css-1f43avz-a11yText-A11yText"
+      id="react-select-3-live-region"
+    />
+    <span
+      aria-atomic="false"
+      aria-live="polite"
+      aria-relevant="additions text"
+      class="css-1f43avz-a11yText-A11yText"
+    />
+    <div
+      class="react-select-prefix__control css-1s2u09g-control"
+    >
+      <div
+        class="react-select-prefix__value-container react-select-prefix__value-container--has-value css-319lph-ValueContainer"
+      >
+        <div
+          class="react-select-prefix__single-value css-qc6sy-singleValue"
+        >
+          Option 1
+        </div>
+        <input
+          aria-autocomplete="list"
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-readonly="true"
+          class="css-mohuvp-dummyInput-DummyInput"
+          id="selected_options"
+          inputmode="none"
+          role="combobox"
+          tabindex="0"
+          value=""
+        />
+      </div>
+      <div
+        class="react-select-prefix__indicators css-1hb7zxy-IndicatorsContainer"
+      >
+        <div
+          aria-hidden="true"
+          class="react-select-prefix__indicator react-select-prefix__dropdown-indicator css-tlfecz-indicatorContainer"
+        >
+          <svg
+            class="w-1.5 h-1 mx-1 text-primary-oxford-blue transform transition-transform"
+          />
+        </div>
+      </div>
+    </div>
+    <input
+      name="selected_options"
+      type="hidden"
+      value="option_1"
+    />
+  </div>
+</form>
+`;
+
+exports[`SelectField selects several options in a multi-options input 1`] = `
+<form
+  data-testid="form"
+>
+  <label
+    for="selected_options"
+  >
+    Options
+  </label>
+  <div
+    class="react-select-wrapper css-b62m3t-container"
+  >
+    <span
+      class="css-1f43avz-a11yText-A11yText"
+      id="react-select-5-live-region"
+    />
+    <span
+      aria-atomic="false"
+      aria-live="polite"
+      aria-relevant="additions text"
+      class="css-1f43avz-a11yText-A11yText"
+    />
+    <div
+      class="react-select-prefix__control css-1s2u09g-control"
+    >
+      <div
+        class="react-select-prefix__value-container react-select-prefix__value-container--is-multi css-319lph-ValueContainer"
+      >
+        <div
+          class="react-select-prefix__placeholder css-14el2xx-placeholder"
+          id="react-select-5-placeholder"
+        >
+          Select...
+        </div>
+        <input
+          aria-autocomplete="list"
+          aria-describedby="react-select-5-placeholder"
+          aria-expanded="false"
+          aria-haspopup="true"
+          aria-readonly="true"
+          class="css-mohuvp-dummyInput-DummyInput"
+          id="selected_options"
+          inputmode="none"
+          role="combobox"
+          tabindex="0"
+          value=""
+        />
+      </div>
+      <div
+        class="react-select-prefix__indicators css-1hb7zxy-IndicatorsContainer"
+      >
+        <div
+          aria-hidden="true"
+          class="react-select-prefix__indicator react-select-prefix__dropdown-indicator css-tlfecz-indicatorContainer"
+        >
+          <svg
+            class="w-1.5 h-1 mx-1 text-primary-oxford-blue transform transition-transform"
+          />
+        </div>
+      </div>
+    </div>
+    <div>
+      <input
+        name="selected_options"
+        type="hidden"
+      />
+    </div>
+  </div>
+</form>
+`;

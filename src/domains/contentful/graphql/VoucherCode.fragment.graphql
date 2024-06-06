@@ -1,0 +1,14 @@
+fragment voucherCode on VoucherCode {
+  icon {
+    __typename
+    ref
+  }
+   voucherRichTextTitle: newTitle {
+        __typename
+        json
+      }
+  title
+  description
+  code
+  discount
+}

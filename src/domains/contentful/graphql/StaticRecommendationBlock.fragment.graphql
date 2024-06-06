@@ -1,0 +1,8 @@
+fragment staticRecommendationBlock on StaticRecommendationBlock {
+  title
+  showTitle
+  skuList
+  view
+  showCount
+  countExpire
+}

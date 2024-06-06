@@ -1,0 +1,20 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+import { theme } from '../../tailwind.config.js'
+
+<Meta title="Tokens/Spacing" />
+
+# Spacing
+
+<>
+  {Object.keys(theme.spacing)
+    .sort((a, b) => Number(a) - Number(b))
+    .map(value => (
+      <div>
+        <h2>{value}</h2>
+        <p
+          className="bg-primary-caribbean-green"
+          style={{ height: theme.spacing[value] }}
+        />
+      </div>
+    ))}
+</>

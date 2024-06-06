@@ -1,0 +1,3 @@
+fragment staticHeaderBlock on StaticHeaderBlock {
+  title
+}

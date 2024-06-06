@@ -1,0 +1,8 @@
+fragment exponeaRecommendation on ExponeaRecommendation {
+  title
+  altTitle
+  id
+  type
+  isSlider
+  quantity
+}

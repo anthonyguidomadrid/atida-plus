@@ -1,0 +1,23 @@
+.cache-node:
+  cache:
+    key: ${CI_PIPELINE_ID}-node
+    paths:
+      - .yarn
+      - .cache
+      - node_modules
+
+.node:
+  image: node:16.18.1-bullseye
+  extends: .cache-node
+  tags:
+    - ec2
+  interruptible: true
+  variables:
+    CYPRESS_CACHE_FOLDER: "$CI_PROJECT_DIR/.cache/Cypress"
+  before_script:
+    - export PATH="$(yarn global bin):$PATH"
+
+.yarn-deps:
+  extends: .node
+  script:
+    - yarn install --immutable

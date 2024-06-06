@@ -1,0 +1,287 @@
+stages:
+  - setup
+  - check
+  - build
+  - deploy-pipelines
+  - deploy-storybook
+  - test
+
+workflow:
+  rules:
+    - if: $CI_MERGE_REQUEST_ID
+      when: never
+    - when: always
+
+include:
+  - local: ".gitlab-ci-deploy-node-and-yarn-dep.yml"
+  - local: ".gitlab-ci-deploy-lighthouse.yml"
+  - local: ".gitlab-ci-deploy-postman.yml"
+  - project: "atida/infra/includes"
+    ref: master
+    file:
+      - '/platform/fortify-sast-fod.yaml'
+
+variables:
+  CI_IMAGE: ${ECR_REGISTRY_ATIDA}/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
+  AWS_DEFAULT_REGION: eu-central-1
+
+yarn-deps:
+  stage: setup
+  extends: .yarn-deps
+
+.dev:
+  variables:
+    ENVIRONMENT: dev
+    KUBE_NAMESPACE: frontend
+    AWS_IAM_ROLE_ARN: arn:aws:iam::180821729581:role/gitlab-frontend
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+
+build-check:
+  stage: setup
+  script:
+    - touch check.env
+    - |
+      if docker manifest inspect $CI_IMAGE >/dev/null; then
+        echo "SKIP_BUILD=1" >> check.env
+      fi
+  artifacts:
+    reports:
+      dotenv: check.env
+  rules:
+    - if: $FORCE_BUILD
+      when: never
+    - if: $CI_COMMIT_BRANCH =~ /^(develop$|expedite\/|release\/)/
+    - when: never
+  tags:
+    - ec2
+
+danger:
+  stage: setup
+  image: registry.gitlab.com/atida/base-images/danger:8-0.1.0
+  interruptible: true
+  script:
+    - echo "Ensuring danger output not empty" > /tmp/danger.txt
+    - danger --fail-on-errors=true | tee -a /tmp/danger.txt
+    - if grep -q "Not a GitLabCI Pull Request" /tmp/danger.txt; then echo "Not a GitLabCI Merge Request, please re-run in a Merge Request"; exit 1; fi
+  tags:
+    - ec2
+  except:
+    refs:
+      - /^release\/.*$/
+      - /^expedite\/.*$/
+      - master
+      - develop
+
+code-quality:
+  stage: check
+  extends: .node
+  cache:
+    policy: pull
+  script:
+    - yarn lint
+    - yarn tsc
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      when: never
+    - when: on_success
+
+tests:
+  stage: check
+  extends: .node
+  cache:
+    policy: pull
+  script:
+    - yarn test
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
+      when: never
+    - when: on_success
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - junit.xml
+
+fortify-sast-fod:
+  extends:
+    - .fortify-sast-fod
+    - .cache-node
+  tags:
+    - slow
+  stage: check
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^(develop$|expedite\/|release\/)/
+  variables:
+    PACKAGE_OPTS: "--build-tool none"
+    FOD_UPLOADER_OPTS: "-ep 2 -pp 0"
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - package.zip
+    when: always
+
+build-docker:
+  stage: build
+  image:
+    name: ${ECR_REGISTRY_ATIDA}/ci:ws-0.16.0
+    entrypoint:
+      - "/bin/ash"
+      - "-c"
+  script:
+    - docker build -t $CI_IMAGE .
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^(develop$|master$|expedite\/|release\/)/
+      when: never
+    - if: $CI_COMMIT_TAG !~ "/^$/"
+      when: never
+    - when: on_success
+  tags:
+    - ec2
+
+scanner:
+  variables:
+    SCANNER_CONTAINER_NAME: aquascan-$CI_JOB_ID
+  stage: build
+  image:
+    name: ${ECR_REGISTRY_ATIDA}/ci:ws-0.16.0
+    entrypoint:
+      - "/bin/ash"
+      - "-c"
+  script:
+    - |
+      docker build -t $CI_IMAGE .
+      REGISTRY_NAME="$(echo "$CI_IMAGE" | cut -d/ -f1)"
+      mkdir out
+      docker login registry.aquasec.com --username "$AQUA_REG_SEC_USER" --password "$AQUA_REG_SEC_PASSWORD"
+      docker run --name "$SCANNER_CONTAINER_NAME"  -v /var/run/docker.sock:/var/run/docker.sock registry.aquasec.com/scanner:${AQUA_SCANNER_VER} scan -H "$AQUA_HOST_PROD" --user "$AQUA_PROD_SCANNER_USER" --password "$AQUA_PROD_SCANNER_PASSWORD" --local  --registry "${REGISTRY_NAME}" "$CI_IMAGE"  --show-negligible --htmlfile  "/tmp/out.html" --jsonfile "/tmp/out.json"  > /dev/null
+      docker cp "$SCANNER_CONTAINER_NAME":/tmp/out.html $(pwd)/out/Aquascan.html || true
+      docker cp "$SCANNER_CONTAINER_NAME":/tmp/out.json $(pwd)/out/Aquascan.json || true
+    - docker rm "$SCANNER_CONTAINER_NAME"
+    - echo -e "\e[31m**************************************************************************************************\n*\tPlease review the 'out' artifacts folder for Aquasec scan results. \t\t\t *\n*\tPlan and remediate the findings, soon the non compliant builds will be failed. \t\t *\n**************************************************************************************************\e[0m"
+  after_script:
+    - docker rm --force "$SCANNER_CONTAINER_NAME"
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - out/
+    when: always
+  tags:
+    - ec2
+
+docker-publish:
+  variables:
+    SCANNER_CONTAINER_NAME: aquascan-$CI_JOB_ID
+  stage: build
+  image:
+    name: ${ECR_REGISTRY_ATIDA}/ci:ws-0.16.0
+    entrypoint:
+      - "/bin/ash"
+      - "-c"
+  script:
+    - '[ -z "${SKIP_BUILD:-}" ] || echo "Build skipped"'
+    - '[ -n "${SKIP_BUILD:-}" ] || docker build -t $CI_IMAGE .'
+    - |
+      REGISTRY_NAME="$(echo "$CI_IMAGE" | cut -d/ -f1)"
+      mkdir out
+      docker login registry.aquasec.com --username "$AQUA_REG_SEC_USER" --password "$AQUA_REG_SEC_PASSWORD"
+      docker run --name "$SCANNER_CONTAINER_NAME"  -v /var/run/docker.sock:/var/run/docker.sock registry.aquasec.com/scanner:${AQUA_SCANNER_VER} scan -H "$AQUA_HOST_PROD" --user "$AQUA_PROD_SCANNER_USER" --password "$AQUA_PROD_SCANNER_PASSWORD" --local --register --registry "${REGISTRY_NAME}" "$CI_IMAGE"  --show-negligible --htmlfile  "/tmp/out.html" --jsonfile "/tmp/out.json"  > /dev/null
+      docker cp "$SCANNER_CONTAINER_NAME":/tmp/out.html $(pwd)/out/Aquascan.html || true
+      docker cp "$SCANNER_CONTAINER_NAME":/tmp/out.json $(pwd)/out/Aquascan.json || true
+    - docker rm "$SCANNER_CONTAINER_NAME"
+    - echo -e "\e[31m**************************************************************************************************\n*\tPlease review the 'out' artifacts folder for Aquasec scan results. \t\t\t *\n*\tPlan and remediate the findings, soon the non compliant builds will be failed. \t\t *\n**************************************************************************************************\e[0m"
+    - '[ -n "${SKIP_BUILD:-}" ] || docker push $CI_IMAGE'
+  after_script:
+    - docker rm --force "$SCANNER_CONTAINER_NAME"
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - out/
+    when: always
+  tags:
+    - ec2
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^(develop$|expedite\/|release\/)/
+
+storybook:
+  variables:
+    NR_NATIVE_METRICS_NO_BUILD: 'true'
+  stage: build
+  extends:
+    - .dev
+    - .node
+  cache:
+    policy: pull
+  script:
+    - yarn build:storybook
+  artifacts:
+    paths:
+      - storybook-static
+  tags:
+    - ec2
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^(master$|expedite\/|release\/)/
+      when: never
+    - if: $CI_COMMIT_TAG !~ "/^$/"
+      when: never
+    - when: on_success
+
+ES-Atida:deploy:
+  stage: deploy-pipelines
+  trigger:
+    include: ".gitlab-ci-deploy-atida-es.yml"
+    strategy: depend
+  rules:
+    - if: $DEPLOY
+    - if: $CI_COMMIT_BRANCH =~ /^(master|develop$|expedite\/|release\/)/
+
+deploy-dev-storybook:
+  stage: deploy-storybook
+  extends:
+    - .dev
+  image:
+    name: ${ECR_REGISTRY_ATIDA}/ci:infra-0.16.0
+    entrypoint:
+      - "/bin/ash"
+      - "-c"
+  script:
+    - export AWS_ACCESS_KEY_ID="${NEW_AWS_ACCESS_KEY_ID:-$AWS_ACCESS_KEY_ID}" AWS_SECRET_ACCESS_KEY="${NEW_AWS_SECRET_ACCESS_KEY:-$AWS_SECRET_ACCESS_KEY}"
+    - set -o pipefail && export $(aws sts assume-role --role-arn ${AWS_IAM_ROLE_ARN} --role-session-name "gitlab-$ENVIRONMENT-ci"  | jq -r  '.Credentials | "AWS_SESSION_TOKEN=\(.SessionToken) AWS_ACCESS_KEY_ID=\(.AccessKeyId) AWS_SECRET_ACCESS_KEY=\(.SecretAccessKey) "')
+    - aws s3 sync storybook-static/ s3://storybook.dev.atidaplus.com/
+  tags:
+    - ec2
+  needs: ["storybook"]
+
+pipeline:cypress:es-atida:
+  stage: test
+  trigger:
+    include: ".gitlab-ci-deploy-cypress.yml"
+    strategy: depend
+  rules:
+    - if: $DEPLOY
+    - if: $CI_COMMIT_BRANCH =~ /^(master|develop$|expedite\/|release\/)/
+
+postman_tests:mr:
+  stage: test
+  needs: []
+  extends:
+    - .postman_tests
+  rules:
+    - when: never
+    - if: $DEPLOY
+      when: never
+    - if: $CI_COMMIT_BRANCH =~ /^(develop$|master$|expedite\/|release\/)/
+      when: never
+    - when: manual
+      allow_failure: true
+
+lighthouse:ci:
+  stage: test
+  extends:
+    - .lighthouse
+  needs: [yarn-deps]
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^(develop$|master$)/
+      when: never
+    - when: manual
+      allow_failure: true

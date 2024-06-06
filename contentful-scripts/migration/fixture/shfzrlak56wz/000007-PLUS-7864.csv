@@ -1,0 +1,4 @@
+translation.key,translation.value.en-GB,translation.value.de-DE,translation.value.de-AT,translation.complete,sys.tags
+prescription.upload-success.notification.single-item.add-to-cart,1 item was added to your cart,1 Artikel wurde Ihrem Warenkorb hinzugefügt,1 Artikel wurde Ihrem Warenkorb hinzugefügt,true,country-de|country-at
+prescription.upload-success.notification.multiple-items.add-to-cart,{{count}} items was added to your cart,{{count}} Artikel wurde Ihrem Warenkorb hinzugefügt,{{count}} Artikel wurde Ihrem Warenkorb hinzugefügt,true,country-de|country-at
+

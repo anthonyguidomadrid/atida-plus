@@ -1,0 +1,58 @@
+fragment contentBlockWithImage on ContentBlockWithImage {
+  title
+  header
+  sponsored
+  image {
+    __typename
+    title
+    description
+    url
+    contentType
+  }
+  imageLeft
+  content {
+    __typename
+    json
+  }
+  cta {
+    __typename
+    label
+    url
+    icon {
+      __typename
+      ref
+    }
+    content {
+      __typename
+      json
+    }
+  }
+  textLink {
+    __typename
+    label
+    url
+    icon {
+      __typename
+      ref
+    }
+    content {
+      __typename
+      json
+    }
+  }
+  bgColor {
+    __typename
+    ref
+  }
+  textColor {
+    __typename
+    ref
+  }
+  typography
+  imageSize
+  txtAlignMobile
+  showDesc
+  btnType
+  btnWidthMobile
+  btnPosTablet
+}

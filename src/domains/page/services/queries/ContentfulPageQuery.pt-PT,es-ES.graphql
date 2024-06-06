@@ -1,0 +1,76 @@
+fragment pageContent on Page {
+  __typename
+  title
+  slugOne: slug(locale: "pt-PT")
+  slugTwo: slug(locale: "es-ES")
+  heroHeader {
+    __typename
+    ... on HeroBanner {
+      ...heroBanner
+    }
+    ... on CampaignHeroBanner {
+      ...campaignHeroBanner
+    }
+  }
+  contentBlocksCollection(limit: 26) {
+    items {
+      __typename
+      ...slider
+      ...heroBanner
+      ...campaignHeroBanner
+      ...categoryGrid
+      ...contentBlockWithImage
+      ...uspsCard
+      ...voucherCodes
+      ...promotion
+      ...staticContentBlock
+      ...staticHeaderBlock
+      ...exponeaRecommendation
+      ...containerOfContentBlocks
+      ...groupOfStaticContentBlocks
+      ...topBrands
+      ...linkBlock
+      ...staticRecommendationBlock
+    }
+  }
+  isCampaignPage
+  pageType
+  referencedContent {
+    __typename
+    ...brand
+    ...category
+    ...promotion
+    ...categoryCop
+  }
+  seo {
+    __typename
+    ...seo
+  }
+  contentfulMetadata {
+    tags {
+      id
+    }
+  }
+}
+
+query Page(
+  $preview: Boolean!
+  $locale: String!
+  $slug: String!
+  $allLocales: [String!]!
+  $tags: [String!]!
+) {
+  pageCollection(
+    limit: 1
+    preview: $preview
+    locale: $locale
+    where: {
+      slug: $slug
+      contentfulMetadata: { tags: { id_contains_all: $tags } }
+    }
+  ) {
+    items {
+      ...pageContent
+    }
+  }
+}

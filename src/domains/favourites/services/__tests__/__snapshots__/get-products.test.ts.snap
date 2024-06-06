@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getProducts returns empty products 1`] = `
+Object {
+  "sessionChannel": undefined,
+  "skus": Array [],
+}
+`;
+
+exports[`getProducts returns the normalized basket response with products 1`] = `Array []`;

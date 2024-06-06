@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 12
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          resources:
+            requests:
+              cpu: 1500m
+              memory: "2Gi"
+            limits:
+              cpu: 1500m
+              memory: "2Gi"

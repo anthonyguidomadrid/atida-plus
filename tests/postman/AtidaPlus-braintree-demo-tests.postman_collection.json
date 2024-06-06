@@ -1,0 +1,1044 @@
+{
+  "info": {
+    "_postman_id": "b0c59fd8-bcc6-44e7-9f1d-b44e578bca6f",
+    "name": "AtidaPlus-braintree-demo-tests",
+    "description": "Basic regression tests for Spryker Glue API endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Guest Cart",
+      "item": [
+        {
+          "name": "Generate new anonymous user ID",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.test(\"Random SKU stored as variable\", () => {",
+                  "    pm.environment.set('randomUserID', Math.random().toString().slice(2,8));",
+                  "})"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://reqres.in/api/users/1",
+              "protocol": "https",
+              "host": [
+                "reqres",
+                "in"
+              ],
+              "path": [
+                "api",
+                "users",
+                "1"
+              ]
+            },
+            "description": "This will run at the start of an automated test run to ensure that you start with an empty cart, but you can also run it manually as needed."
+          },
+          "response": []
+        },
+        {
+          "name": "Add product to anonymous cart",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "CartItems = pm.response.json().included.filter(i => i.type === 'guest-cart-items');",
+                  "lastCartItem = CartItems.length - 1;",
+                  "submittedProductInCart = pm.response.json().included[lastCartItem];",
+                  "cartProductAttributes = submittedProductInCart.attributes;",
+                  "demoProduct1Sku = pm.environment.get(\"demoConcreteSku\");",
+                  "",
+                  "const lastCartItemProductData = pm.response.json().included.filter(",
+                  "    element => element.type === 'guest-cart-items' && element.id === demoProduct1Sku",
+                  "    );",
+                  "",
+                  "pm.test(\"Status code is 201\", () => {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Product added to cart\", () => {",
+                  "    pm.expect(submittedProductInCart.type).to.equal('guest-cart-items');",
+                  "    pm.expect(submittedProductInCart.attributes.sku).to.equal(demoProduct1Sku);",
+                  "});",
+                  "",
+                  "pm.test(\"Product(s) in cart has expected attributes\", () => {",
+                  "    pm.expect(cartProductAttributes.sku).to.equal(demoProduct1Sku);",
+                  "    pm.expect(cartProductAttributes.quantity).to.be.at.least(1);",
+                  "    pm.expect(cartProductAttributes.abstractSku).to.equal(pm.environment.get(\"demoAbstractSku\"));",
+                  "});",
+                  "",
+                  "pm.test(\"Product(s) in cart has correct prices\", () => {",
+                  "    quantity = parseInt(cartProductAttributes.quantity);",
+                  "    unitPrice = parseInt(pm.environment.get(\"demoUnitPrice\"));",
+                  "    pm.expect(cartProductAttributes.calculations.unitGrossPrice).to.equal(unitPrice);",
+                  "    pm.expect(cartProductAttributes.calculations.sumGrossPrice).to.equal(unitPrice * quantity);",
+                  "});",
+                  "",
+                  "var response = pm.response.json();",
+                  "if (response && response.data && response.data.id) {",
+                  "    pm.environment.set(\"guestCartId\", response.data.id);",
+                  "}",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Anonymous-Customer-Unique-Id",
+                "value": "{{randomUserID}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "{{acceptLanguage}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"data\": {\n        \"type\": \"guest-cart-items\",\n        \"attributes\": {\n            \"sku\": \"{{demoConcreteSku}}\",\n            \"quantity\": 1\n        }\n    }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/guest-carts//guest-cart-items/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "guest-carts",
+                "",
+                "guest-cart-items",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get anonymous cart",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", () => {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Gest Cart have basic attributes\", () => {",
+                  "    _.each(pm.response.json().data, (item) => {",
+                  "        pm.expect(item.type).to.equal('guest-carts')",
+                  "        pm.expect(item.id).to.be.a('string')",
+                  "        pm.expect(item.attributes.priceMode).to.be.oneOf(['GROSS_MODE', 'NET_MODE'])",
+                  "        pm.expect(item.attributes.currency).to.match(/[A-Z]{3}$/)",
+                  "        pm.expect(item.attributes.store).to.match(/[A-Z]{2}$/)",
+                  "        pm.expect(item.attributes.totals).to.be.an('object')",
+                  "    })",
+                  "});",
+                  "",
+                  "pm.test(\"Guest Cart ID stored as variable\", () => {",
+                  "    pm.environment.set('guestCartId', pm.response.json().data[0].id)",
+                  "})"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "X-Anonymous-Customer-Unique-Id",
+                "value": "{{randomUserID}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/guest-carts/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "guest-carts",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Customer",
+      "item": [
+        {
+          "name": "Create Customer",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "testUser = pm.environment.get('testUser');",
+                  "if (!testUser) {",
+                  "    const mathRandom = Math.random()*100000+1;",
+                  "    const randomId = Math.floor(mathRandom);",
+                  "    pm.environment.set(\"testUser\", \"test\"+randomId+\"@atida.com\");",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var response = pm.response.json();",
+                  "if (response && response.data && response.data.id) {",
+                  "    pm.test(\"Status code is 201\", function () {",
+                  "        pm.response.to.have.status(201);",
+                  "    });",
+                  "",
+                  "    pm.test(\"Customer reference variable is updated\", function () {",
+                  "        response = pm.response.json();",
+                  "        pm.environment.set(\"customerReference\", response.data.id);",
+                  "    });",
+                  "}",
+                  "else {",
+                  "        pm.test(\"Status code is 422 - customer already exists\", function () {",
+                  "        pm.response.to.have.status(422);",
+                  "    });",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "{{acceptLanguage}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"customers\",\n    \"attributes\": {\n      \"firstName\": \"Postman\",\n      \"lastName\": \"Test\",\n      \"salutation\": \"Mr\",\n      \"email\": \"{{testUser}}\",\n      \"password\": \"{{testPassword}}\",\n      \"confirmPassword\": \"{{testPassword}}\",\n      \"acceptedTerms\": true\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/customers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login as customer",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", () => {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Correct tokens are returned\", () => {",
+                  "    response = pm.response.json()",
+                  "    pm.expect(response.data.attributes.tokenType).to.equal('Bearer')",
+                  "    pm.expect(response.data.attributes.accessToken).to.include('eyJ')",
+                  "    pm.expect(response.data.attributes.refreshToken).to.include('def')",
+                  "});",
+                  "",
+                  "pm.test(\"Access and Refresh tokens stored as variables\", () => {",
+                  "    var response = pm.response.json();",
+                  "    pm.environment.set(\"access-token\", response.data.attributes.accessToken)",
+                  "    pm.environment.set(\"refresh-token\", response.data.attributes.refreshToken)",
+                  "})"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-Anonymous-Customer-Unique-Id",
+                "value": "{{randomUserID}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"data\": {\n        \"type\": \"access-tokens\",\n        \"attributes\": {\n            \"username\": \"{{testUser}}\",\n            \"password\": \"{{testPassword}}\"\n        }\n    }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/access-tokens",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "access-tokens"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Customer Info",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Customer reference variable is updated\", function () {",
+                  "    response = pm.response.json();",
+                  "    pm.environment.set(\"customerReference\", response.data.id);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/customers/{{customerReference}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "customers",
+                "{{customerReference}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Authenticated Cart",
+      "item": [
+        {
+          "name": "Create authenticated cart from scratch",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var response = pm.response.json();",
+                  "if (response && response.data && response.data.id) {",
+                  "    pm.test(\"Status code is 201\", function () {",
+                  "        pm.response.to.have.status(201);",
+                  "    });",
+                  "",
+                  "    pm.test(\"cartID environment variable updated\", function () {",
+                  "        pm.environment.set(\"cartId\", response.data.id);",
+                  "    });",
+                  "}",
+                  "else {",
+                  "    pm.test(\"Status code is 422 - cart already exists\", function () {",
+                  "        pm.response.to.have.status(422);",
+                  "    });",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "{{acceptLanguage}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"carts\",\n    \"attributes\": {\n      \"priceMode\": \"GROSS_MODE\",\n      \"currency\": \"EUR\",\n      \"store\": \"{{acceptLanguage}}\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/carts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "carts"
+              ]
+            },
+            "description": "This test isn't really needed, but it's useful to know that it exists!"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Carts",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", () => {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"One cart object returned\", () => {",
+                  "    let response = pm.response.json();",
+                  "    let carts = response.data.filter(function(item) {",
+                  "        return item.type.includes(\"carts\");",
+                  "        });",
+                  "",
+                  "    pm.expect(carts.length).to.eql(1);",
+                  "});",
+                  "",
+                  "pm.test(\"Carts have basic attributes\", () => {",
+                  "    _.each(pm.response.json().data, (item) => {",
+                  "        pm.expect(item.type).to.equal('carts')",
+                  "        pm.expect(item.id).to.be.a('string')",
+                  "        pm.expect(item.attributes.priceMode).to.be.oneOf(['GROSS_MODE', 'NET_MODE'])",
+                  "        pm.expect(item.attributes.currency).to.match(/[A-Z]{3}$/)",
+                  "        pm.expect(item.attributes.store).to.match(/[A-Z]{2}$/)",
+                  "        pm.expect(item.attributes.totals).to.be.an('object')",
+                  "    })",
+                  "});",
+                  "",
+                  "pm.test(\"Cart ID stored as variable\", () => {",
+                  "    pm.environment.set('cartId', pm.response.json().data[0].id)",
+                  "})"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "de",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/carts",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "carts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add product to authenticated cart",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "CartItems = pm.response.json().included.filter(i => i.type === 'items');",
+                  "lastCartItem = CartItems.length - 1;",
+                  "submittedProductInCart = pm.response.json().included[lastCartItem];",
+                  "cartProductAttributes = submittedProductInCart.attributes;",
+                  "demoProduct2Sku = pm.environment.get(\"demoConcreteSku\");",
+                  "",
+                  "const lastCartItemProductData = pm.response.json().included.filter(",
+                  "    element => element.type === 'items' && element.id === demoProduct2Sku",
+                  "    );",
+                  "",
+                  "pm.test(\"Status code is 201\", () => {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Product added to cart\", () => {",
+                  "    pm.expect(submittedProductInCart.type).to.equal('items');",
+                  "    pm.expect(submittedProductInCart.attributes.sku).to.equal(demoProduct2Sku);",
+                  "});",
+                  "",
+                  "pm.test(\"Product in cart has matching attributes\", () => {",
+                  "    pm.expect(cartProductAttributes.sku).to.equal(demoProduct2Sku);",
+                  "    pm.expect(cartProductAttributes.quantity).to.at.least(1);",
+                  "    pm.expect(cartProductAttributes.abstractSku).to.equal(pm.environment.get(\"demoAbstractSku\"));",
+                  "});",
+                  "",
+                  "pm.test(\"Product in cart has correct prices\", () => {",
+                  "    quantity = parseInt(cartProductAttributes.quantity);",
+                  "    unitPrice = parseInt(pm.environment.get(\"demoUnitPrice\"));",
+                  "    pm.expect(cartProductAttributes.calculations.unitGrossPrice).to.equal(unitPrice);",
+                  "    pm.expect(cartProductAttributes.calculations.sumGrossPrice).to.equal(unitPrice * quantity);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"data\": {\n        \"type\": \"items\",\n        \"attributes\": {\n            \"sku\": \"{{demoConcreteSku}}\",\n            \"quantity\": 1\n        }\n    }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/carts/{{cartId}}/items/",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "carts",
+                "{{cartId}}",
+                "items",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Cart by ID",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", () => {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Cart has basic attributes\", () => {",
+                  "    data = pm.response.json().data;",
+                  "    pm.expect(data.type).to.equal('carts')",
+                  "    pm.expect(data.id).to.be.a('string')",
+                  "    pm.expect(data.attributes.priceMode).to.be.oneOf(['GROSS_MODE', 'NET_MODE'])",
+                  "    pm.expect(data.attributes.currency).to.match(/[A-Z]{3}$/)",
+                  "    pm.expect(data.attributes.store).to.match(/[A-Z]{2}$/)",
+                  "    pm.expect(data.attributes.totals).to.be.an('object')",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept-Language",
+                "value": "de",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/carts/{{cartId}}?include=items",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "carts",
+                "{{cartId}}"
+              ],
+              "query": [
+                {
+                  "key": "include",
+                  "value": "items"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Authenticated Checkout",
+      "item": [
+        {
+          "name": "Authenticated Checkout",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", () => {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Payment Reference stored as variable\", () => {",
+                  "    response = pm.response.json()",
+                  "    pm.environment.set('paymentReference', response.included[0].attributes.payments[0].paymentReference)",
+                  "    pm.expect(pm.environment.get('paymentReference')).not.to.be.null;",
+                  "})",
+                  "",
+                  "pm.test(\"Order Reference stored as variable\", () => {",
+                  "    response = pm.response.json()",
+                  "    pm.environment.set('orderReference', response.data.attributes.orderReference)",
+                  "    pm.expect(pm.environment.get('orderReference')).not.to.be.null;",
+                  "})"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "type": "text",
+                "value": "application/json"
+              },
+              {
+                "key": "accept-language",
+                "type": "text",
+                "value": "{{acceptLanguage}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"checkout\",\n    \"attributes\": {\n      \"customer\": {\n        \"email\": \"{{testUser}}\",\n        \"salutation\": \"Mr\",\n        \"firstName\": \"string\",\n        \"lastName\": \"string\"\n      },\n      \n      \"idCart\": \"{{cartId}}\",\n      \"billingAddress\": {\n        \"salutation\": \"Mrs\",\n        \"firstName\": \"g2\",\n        \"lastName\": \"string\",\n        \"address1\": \" annenstraße 4\",\n        \"address2\": \" \",\n        \"zipCode\": \"10179\",\n        \"city\": \"Bonn\",\n        \"iso2Code\": \"{{acceptLanguage}}\",\n        \"company\": \"string\",\n        \"phone\": \"string\",\n        \"isDefaultBilling\": true,\n        \"isDefaultShipping\": true\n      },\n      \"shippingAddress\": {\n        \"salutation\": \"Mr\",\n        \"firstName\": \"string\",\n        \"lastName\": \"g2s\",\n        \"address1\": \"Carl-Blos-Strass. 2\",\n        \"address2\": \" \",\n        \"zipCode\": \"53113\",\n        \"city\": \"Bonn\",\n        \"iso2Code\": \"{{acceptLanguage}}\",\n        \"company\": \"string\",\n        \"phone\": \"string\",\n        \"isDefaultBilling\": true,\n        \"isDefaultShipping\": true\n      },\n      \"payments\": [\n        {\n\t      \t\"paymentSelection\": \"atidaPaymentInternal\",\n            \"paymentMethodName\": \"atidaPaymentInternal\",\n            \"paymentProviderName\": \"AtidaPayment\"\n        }\n  \t  ],\n      \"shipment\": {\n        \"idShipmentMethod\": {{shipmentMethodId}}\n      }\n    }\n  }\n}\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/checkout",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "checkout"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "My Account",
+      "item": [
+        {
+          "name": "Get Orders",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "response = pm.response.json()",
+                  "if (response.data && response.data[0] && response.data[0].id) {",
+                  "    pm.test(\"Listed orders have expected attributes\", function () {",
+                  "        _.each(pm.response.json().data, (item) => {",
+                  "            pm.expect(item.type).to.eql(\"orders\");",
+                  "            pm.expect(item.id).to.include(pm.environment.get(\"acceptLanguage\") + \"--\");",
+                  "            pm.expect(item.attributes).to.be.an(\"object\");",
+                  "            pm.expect(item.links.self).to.include(\"/orders/\" + pm.environment.get(\"acceptLanguage\") + \"--\");",
+                  "        });",
+                  "    });",
+                  "",
+                  "    pm.test(\"Latest order is included in response\", function () {",
+                  "        function _isContains(json, keyname, value) {",
+                  "            return Object.keys(json).some(key => {",
+                  "                return typeof json[key] === 'object' ? ",
+                  "                _isContains(json[key], keyname, value) : key === keyname && json[key] === value;",
+                  "            });",
+                  "        };",
+                  "        ",
+                  "        response = pm.response.json();",
+                  "        let orders = response.data.filter(function(item) {",
+                  "        return item.type.includes(\"orders\");",
+                  "        });",
+                  "",
+                  "        pm.expect(_isContains(orders, \"id\", pm.environment.get('orderReference'))).to.be.true;",
+                  "    })",
+                  "};"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/orders",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "orders"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get new access token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", () => {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "",
+                  "pm.test(\"Correct tokens are returned\", () => {",
+                  "    pm.expect(pm.response.json().data.attributes.tokenType).to.equal('Bearer')",
+                  "    pm.expect(pm.response.json().data.attributes.accessToken).to.include('eyJ')",
+                  "    pm.expect(pm.response.json().data.attributes.refreshToken).to.include('def')",
+                  "});",
+                  "",
+                  "var response = pm.response.json();",
+                  "pm.environment.set(\"access-token\", response.data.attributes.accessToken);",
+                  "pm.environment.set(\"refresh-token\", response.data.attributes.refreshToken);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "name": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"refresh-tokens\",\n    \"attributes\": {\n      \"refreshToken\": \"{{refresh-token}}\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/refresh-tokens",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "refresh-tokens"
+              ]
+            },
+            "description": "Submit Refresh Token to get new Access Token"
+          },
+          "response": []
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Braintree Payment Flow",
+      "item": [
+        {
+          "name": "Create Client Token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{paymentServiceBaseUrl}}/create-client-token",
+              "host": [
+                "{{paymentServiceBaseUrl}}"
+              ],
+              "path": [
+                "create-client-token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Braintree Payment Method",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"method_code\": \"{{methodCode}}\",\n  \"data\": {\n    \"payment_nonce\": \"{{paymentNonce}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{paymentServiceBaseUrl}}/create-payment-method",
+              "host": [
+                "{{paymentServiceBaseUrl}}"
+              ],
+              "path": [
+                "create-payment-method"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Submit Payment to Spryker",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"type\": \"order-payments\",\n    \"attributes\": {\n      \"paymentIdentifier\": \"{{paymentReference}}\",\n      \"dataPayload\": {\n        \"payment_token\": \"{{paymentToken}}\",\n        \"method_code\": \"{{methodCode}}\"\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/order-payments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "order-payments"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{access-token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://glue-de-spryker.dev.atidapure.com"
+    },
+    {
+      "key": "testUser",
+      "value": "qa@inviqa.com"
+    },
+    {
+      "key": "testPassword",
+      "value": "Test1234"
+    },
+    {
+      "key": "paymentServiceBaseUrl",
+      "value": "https://payment-plus.dev.atidapure.com"
+    },
+    {
+      "key": "customerReference",
+      "value": "DE--22"
+    },
+    {
+      "key": "methodCode",
+      "value": "mollie_sepa"
+    },
+    {
+      "key": "acceptLanguage",
+      "value": "DE"
+    }
+  ]
+}

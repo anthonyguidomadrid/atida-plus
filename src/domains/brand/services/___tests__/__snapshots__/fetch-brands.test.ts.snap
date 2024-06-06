@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fetchBrands fetch brands with GrahpQL returns the normalized response 1`] = `
+Object {
+  "items": Array [
+    Object {
+      "id": "babaria-test-brand",
+      "image": Object {
+        "url": "https://images.ctfassets.net/7g2w796onies/38LA8ERIEBglSvG3XR2vCi/01fbdbc080c12381cf118fd8c90d1bf4/babaria-body-milk.jpeg",
+      },
+      "title": "Babaria",
+    },
+  ],
+  "total": 1,
+}
+`;

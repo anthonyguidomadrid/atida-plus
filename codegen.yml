@@ -1,0 +1,18 @@
+overwrite: true
+schema:
+  - ? ${CMS_GRAPHQL_HOST}/spaces/${CMS_SPACE_ID}/environments/${CMS_ENVIRONMENT_ID}
+    : headers:
+        Authorization: Bearer ${CMS_TOKEN}
+documents:
+  - 'src/**/*.graphql'
+  - '!src/**/ContentfulPageQuery.*.graphql'
+  - 'src/domains/page/services/queries/ContentfulPageQuery.${CMS_LOCALE_USED_LIST}.graphql'
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-document-nodes'
+      - 'typescript-operations'
+    config:
+      immutableTypes: true
+      disableDescriptions: true

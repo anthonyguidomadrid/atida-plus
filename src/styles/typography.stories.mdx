@@ -1,0 +1,46 @@
+import { Meta, Typeset } from '@storybook/addon-docs/blocks'
+import { theme } from '../../tailwind.config.js'
+
+<Meta title="Tokens/Typography" />
+
+# Typography
+
+## Moranga
+
+### Light
+
+<Typeset
+  fontSizes={Object.keys(theme.fontSize).map(size => theme.fontSize[size][0])}
+  fontFamily={theme.fontFamily.heading[0]}
+  fontWeight={300}
+  sampleText="Grumpy wizards make a toxic brew for the jovial queen."
+/>
+
+### Normal
+
+<Typeset
+  fontSizes={Object.keys(theme.fontSize).map(size => theme.fontSize[size][0])}
+  fontFamily={theme.fontFamily.heading[0]}
+  fontWeight={400}
+  sampleText="Grumpy wizards make a toxic brew for the jovial queen."
+/>
+
+## Söhne Buch
+
+### Light
+
+<Typeset
+  fontSizes={Object.keys(theme.fontSize).map(size => theme.fontSize[size][0])}
+  fontFamily={theme.fontFamily.body[0]}
+  fontWeight={300}
+  sampleText="Grumpy wizards make a toxic brew for the jovial queen."
+/>
+
+### Semibold
+
+<Typeset
+  fontSizes={Object.keys(theme.fontSize).map(size => theme.fontSize[size][0])}
+  fontFamily={theme.fontFamily.body[0]}
+  fontWeight={500}
+  sampleText="Grumpy wizards make a toxic brew for the jovial queen."
+/>

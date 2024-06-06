@@ -1,0 +1,9 @@
+fragment uspsCard on UspsCard {
+  title
+  uspsCollection(limit: 5) {
+    items {
+      __typename
+      ...usp
+    }
+  }
+}

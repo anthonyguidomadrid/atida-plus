@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`orderHistory test order history with populated data 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "date": "1 October 2021",
+      "orderHistory": Array [
+        Object {
+          "attributes": Object {
+            "calculatedDiscounts": Array [],
+            "createdAt": "2021-10-01 07:41:49.623969",
+            "currencyIsoCode": "EUR",
+            "items": Array [
+              Object {
+                "id": "846502351931",
+                "isPromo": false,
+                "metadata": Object {},
+                "quantity": 1,
+                "sku": "846502351931",
+                "sumGrossPrice": 942,
+                "unitGrossPrice": 942,
+              },
+            ],
+            "priceMode": "GROSS_MODE",
+            "productDiscounts": Array [],
+            "shipments": Array [
+              Object {
+                "erpShipmentStatus": "in_progres",
+                "erpTrackingReference": "some-tracking-url",
+                "erpTrackingUrl": "some-tracking-url",
+                "estimatedDeliveryDate": null,
+                "maxDeliveryDays": 3,
+                "minDeliveryDays": 1,
+                "shipmentStatus": null,
+                "trackingLink": null,
+              },
+            ],
+            "status": Array [
+              Object {
+                "displayName": "oms.state.pending",
+                "name": "pending",
+              },
+            ],
+            "totals": Object {
+              "canceledTotal": 0,
+              "discountTotal": 0,
+              "expenseTotal": 399,
+              "grandTotal": 1341,
+              "remunerationTotal": 0,
+              "subtotal": 942,
+              "surchargeTotal": 0,
+              "taxTotal": 240,
+            },
+          },
+          "id": "PT--8723",
+          "links": Object {
+            "self": "http://glue-es-spryker.dev.atida.com/orders/PT--8723?page[limit]=5&page[offset]=0&sort=-created_at",
+          },
+          "maxProductsIndex": 7,
+          "type": "orders",
+        },
+      ],
+      "unFormattedDate": "2021-10-01 07:41:49.623969",
+    },
+  ],
+  "links": Array [],
+}
+`;
+
+exports[`orderHistory test order history without order history items 1`] = `
+Object {
+  "data": Array [
+    Object {
+      "date": "24 February 2021",
+      "orderHistory": Array [
+        Object {
+          "attributes": Object {
+            "calculatedDiscounts": Array [],
+            "createdAt": "2021-02-24T10:07:27+00:00",
+            "currencyIsoCode": "EUR",
+            "items": Array [],
+            "priceMode": "GROSS_MODE",
+            "productDiscounts": Array [],
+            "shipments": Array [
+              Object {
+                "erpShipmentStatus": "in_progres",
+                "erpTrackingReference": "some-tracking-url",
+                "erpTrackingUrl": "some-tracking-url",
+                "estimatedDeliveryDate": null,
+                "maxDeliveryDays": 3,
+                "minDeliveryDays": 1,
+                "shipmentStatus": null,
+                "trackingLink": null,
+              },
+            ],
+            "status": Array [
+              Object {
+                "displayName": "oms.state.pending",
+                "name": "pending",
+              },
+            ],
+            "totals": Object {
+              "canceledTotal": 0,
+              "discountTotal": 0,
+              "expenseTotal": 399,
+              "grandTotal": 1341,
+              "remunerationTotal": 0,
+              "subtotal": 942,
+              "surchargeTotal": 0,
+              "taxTotal": 240,
+            },
+          },
+          "id": "PT--8723",
+          "links": Object {
+            "self": "http://glue-es-spryker.dev.atida.com/orders/PT--8723?page[limit]=5&page[offset]=0&sort=-created_at",
+          },
+          "maxProductsIndex": 7,
+          "type": "orders",
+        },
+      ],
+      "unFormattedDate": "2021-02-24T10:07:27+00:00",
+    },
+  ],
+  "links": Array [],
+}
+`;

@@ -1,0 +1,11 @@
+translation.key,translation.value.en-GB,translation.value.de-DE,translation.value.de-AT,translation.complete,sys.tags
+prescription.upload-description.mobile.start, or the button below to upload your prescription.," oder die Schaltfläche unten, um Ihr Rezept hochzuladen."," oder die Schaltfläche unten, um Ihr Rezept hochzuladen.",true,country-de|country-at
+prescription.upload-description.desktop.start,Drag and drop file here or use the button below to upload your prescription.,"Ziehen Sie die Datei hierher und legen Sie sie dort ab, oder verwenden Sie die Schaltfläche unten, um Ihr Rezept hochzuladen.","Ziehen Sie die Datei hierher und legen Sie sie dort ab, oder verwenden Sie die Schaltfläche unten, um Ihr Rezept hochzuladen.",true,country-de|country-at
+prescription.upload-description.success, was successfully uploaded., wurde erfolgreich hochgeladen., wurde erfolgreich hochgeladen.,true,country-de|country-at
+prescription.upload-description.tap-here,Tap here,Hier drücken,Hier drücken,true,country-de|country-at
+prescription.button.add-to-basket,Add to basket,Zum Warenkorb hinzufügen,Zum Warenkorb hinzufügen,true,country-de|country-at
+prescription.upload-success.notification.multiple-items,Great we found {{count}} items.,"Großartig, wir haben {{count}} Artikel gefunden.","Großartig, wir haben {{count}} Artikel gefunden.",true,country-de|country-at
+prescription.upload-success.notification.single-item,Great we found 1 item.,"Großartig, wir haben 1 Artikel gefunden.","Großartig, wir haben 1 Artikel gefunden.",true,country-de|country-at
+prescription.upload-button.upload-again,Upload again,Nochmals hochladen,Nochmals hochladen,true,country-de|country-at
+prescription.upload-button.upload-prescription,Upload prescription,Rezept hochladen,Rezept hochladen,true,country-de|country-at
+prescription.upload-success.file,File,Datei,Datei,true,country-de|country-at

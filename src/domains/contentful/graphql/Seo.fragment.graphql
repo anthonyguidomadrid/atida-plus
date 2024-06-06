@@ -1,0 +1,23 @@
+fragment seo on Seo {
+  title
+  description
+  keywords
+  image {
+    __typename
+    url
+  }
+  header
+  copy {
+    __typename
+    json
+  }
+  copyExpandable {
+    __typename
+    json
+  }
+  noIndex
+  noFollow
+  link {
+    slug
+  }
+}

@@ -1,0 +1,26 @@
+fragment marketingTeaser on MarketingTeaser {
+  __typename
+  title
+  teaserDescription
+  sponsored
+  logo {
+    __typename
+    url
+  }
+  text
+  color {
+    __typename
+    ref
+  }
+  fullWidth
+  image {
+    __typename
+    url
+  }
+  bgColor {
+    __typename
+    ref
+  }
+  button
+  slug
+}

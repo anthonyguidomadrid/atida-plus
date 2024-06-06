@@ -1,0 +1,9 @@
+fragment voucherCodes on VoucherCodes {
+title
+  voucherCodesCollection(limit: 3) {
+    items {
+      __typename
+      ...voucherCode
+    }
+  }
+}

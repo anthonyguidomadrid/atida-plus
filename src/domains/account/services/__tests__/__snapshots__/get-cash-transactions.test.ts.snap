@@ -1,0 +1,159 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getCashTransactions transactions - FF off returns the correct response 1`] = `
+Object {
+  "totalPages": 4,
+  "transactions": Array [
+    Object {
+      "date": "2022-10-04",
+      "transactions": Array [
+        Object {
+          "amount": 200,
+          "transaction_date": "2022-10-04T14:20:22.029764445Z",
+          "transaction_type": "debit",
+        },
+        Object {
+          "amount": 280,
+          "expiry_date": "2023-10-04T14:20:22.029764445Z",
+          "transaction_date": "2022-10-04T14:20:22.029764445Z",
+          "transaction_type": "credit",
+        },
+      ],
+    },
+    Object {
+      "date": "2022-07-23",
+      "transactions": Array [
+        Object {
+          "amount": 280,
+          "expiry_date": "2023-07-23T14:20:22.029764445Z",
+          "transaction_date": "2022-07-23T14:20:22.029764445Z",
+          "transaction_type": "credit",
+        },
+      ],
+    },
+    Object {
+      "date": "2022-06-23",
+      "transactions": Array [
+        Object {
+          "amount": 200,
+          "transaction_date": "2022-06-23T14:20:22.029764445Z",
+          "transaction_type": "debit",
+        },
+        Object {
+          "amount": 280,
+          "expiry_date": "2023-06-23T14:20:22.029764445Z",
+          "transaction_date": "2022-06-23T14:20:22.029764445Z",
+          "transaction_type": "credit",
+        },
+      ],
+    },
+    Object {
+      "date": "2022-05-23",
+      "transactions": Array [
+        Object {
+          "amount": 500,
+          "expiry_date": "2023-05-23T14:20:22.029764445Z",
+          "transaction_date": "2022-05-23T14:20:22.029764445Z",
+          "transaction_type": "credit",
+        },
+      ],
+    },
+    Object {
+      "date": "2022-04-23",
+      "transactions": Array [
+        Object {
+          "amount": 280,
+          "expiry_date": "2023-04-23T14:20:22.029764445Z",
+          "transaction_date": "2022-04-23T14:20:22.029764445Z",
+          "transaction_type": "debit",
+        },
+        Object {
+          "amount": 200,
+          "expiry_date": "2023-04-23T14:20:22.029764445Z",
+          "transaction_date": "2022-04-23T14:20:22.029764445Z",
+          "transaction_type": "credit",
+        },
+      ],
+    },
+  ],
+}
+`;
+
+exports[`getCashTransactions transactions - FF on returns the correct response 1`] = `
+Object {
+  "totalPages": 4,
+  "transactions": Array [
+    Object {
+      "date": "2022-10-04",
+      "transactions": Array [
+        Object {
+          "amount": 200,
+          "transaction_date": "2022-10-04T14:20:22.029764445Z",
+          "transaction_type": "debit",
+        },
+        Object {
+          "amount": 280,
+          "expiry_date": "2023-10-04T14:20:22.029764445Z",
+          "transaction_date": "2022-10-04T14:20:22.029764445Z",
+          "transaction_type": "credit",
+        },
+      ],
+    },
+    Object {
+      "date": "2022-07-23",
+      "transactions": Array [
+        Object {
+          "amount": 280,
+          "expiry_date": "2023-07-23T14:20:22.029764445Z",
+          "transaction_date": "2022-07-23T14:20:22.029764445Z",
+          "transaction_type": "credit",
+        },
+      ],
+    },
+    Object {
+      "date": "2022-06-23",
+      "transactions": Array [
+        Object {
+          "amount": 200,
+          "transaction_date": "2022-06-23T14:20:22.029764445Z",
+          "transaction_type": "debit",
+        },
+        Object {
+          "amount": 280,
+          "expiry_date": "2023-06-23T14:20:22.029764445Z",
+          "transaction_date": "2022-06-23T14:20:22.029764445Z",
+          "transaction_type": "credit",
+        },
+      ],
+    },
+    Object {
+      "date": "2022-05-23",
+      "transactions": Array [
+        Object {
+          "amount": 500,
+          "expiry_date": "2023-05-23T14:20:22.029764445Z",
+          "transaction_date": "2022-05-23T14:20:22.029764445Z",
+          "transaction_type": "credit",
+        },
+      ],
+    },
+    Object {
+      "date": "2022-04-23",
+      "transactions": Array [
+        Object {
+          "amount": 280,
+          "expiry_date": "2023-04-23T14:20:22.029764445Z",
+          "transaction_date": "2022-04-23T14:20:22.029764445Z",
+          "transaction_type": "debit",
+        },
+        Object {
+          "amount": 200,
+          "expiry_date": "2023-04-23T14:20:22.029764445Z",
+          "transaction_date": "2022-04-23T14:20:22.029764445Z",
+          "transaction_type": "credit",
+        },
+      ],
+    },
+  ],
+}
+`;

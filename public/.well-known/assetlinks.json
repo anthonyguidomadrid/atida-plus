@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "es.mifarma.appmifarma",
+    "sha256_cert_fingerprints":
+    ["45:B0:8F:73:F5:49:36:6D:A0:9C:FF:AC:3D:C1:C4:E6:33:97:C7:EE:99:85:14:DC:F3:0A:72:1B:5F:CA:55:4D"]
+  }
+}]

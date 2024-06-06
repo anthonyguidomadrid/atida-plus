@@ -1,0 +1,21 @@
+query expertSignaturesCollectionQuery($locale: String!, $categoryId: String!) {
+  expertSignatureCollection(
+    locale: $locale
+    where: { categories: { id: $categoryId } }
+  ) {
+    items {
+      categories {
+        id
+        title
+      }
+      image {
+        __typename
+        title
+        url
+      }
+      name
+      jobTitle
+      jobDescription
+    }
+  }
+}

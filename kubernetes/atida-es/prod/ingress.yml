@@ -1,0 +1,60 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend
+  annotations:
+    kubernetes.io/ingress.class: traefik-public
+    traefik.ingress.kubernetes.io/router.middlewares: frontend-redirect-www@kubernetescrd
+  generation: 1
+  labels:
+    app: frontend
+spec:
+  rules:
+    - host: atida.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: frontend
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+          - backend:
+              service:
+                name: nginx
+                port:
+                  name: http
+            path: /pt-pt/blog
+            pathType: Prefix
+          - backend:
+              service:
+                name: nginx
+                port:
+                  name: http
+            path: /es-es/blog
+            pathType: Prefix
+    - host: www.atida.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: frontend
+                port:
+                  name: http
+            path: /
+            pathType: Prefix
+          - backend:
+              service:
+                name: nginx
+                port:
+                  name: http
+            path: /pt-pt/blog
+            pathType: Prefix
+          - backend:
+              service:
+                name: nginx
+                port:
+                  name: http
+            path: /es-es/blog
+            pathType: Prefix

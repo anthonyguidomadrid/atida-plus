@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fetchPageFilter fetch promotions returns the normalized response 1`] = `
+Object {
+  "items": Array [
+    Object {
+      "items": Array [
+        Object {
+          "id": "beauty",
+          "label": "Beleza",
+        },
+      ],
+      "title": "Filtrar por categorias",
+    },
+    Object {
+      "items": Array [
+        Object {
+          "id": "campaign-promo.three-wise-men",
+          "label": "Three wise men",
+        },
+      ],
+      "title": "Ofertas especiais",
+    },
+  ],
+}
+`;

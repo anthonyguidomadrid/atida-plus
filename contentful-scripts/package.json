@@ -1,0 +1,66 @@
+{
+  "name": "atida-plus-contentful",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node helpers/contentful/run-tests.js",
+    "lint": "node_modules/eslint/bin/eslint.js --resolve-plugins-relative-to ./ --ext js,mjs,cjs,jsx,ts,tsx ./",
+    "lint-fix": "node_modules/eslint/bin/eslint.js --resolve-plugins-relative-to ./ --ext js,mjs,cjs,jsx,ts,tsx ./ --fix"
+  },
+  "engines": {
+    "node": ">=14.17.0",
+    "npm": ">=6.14.13"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.6.9",
+    "abort-controller": "^3.0.0",
+    "adm-zip": "^0.5.9",
+    "ansi-regex": "5.0.1",
+    "async": "^3.2.2",
+    "better-sqlite3": "^7.4.4",
+    "contentful": "^9.1.34",
+    "contentful-export": "^7.18.7",
+    "contentful-import": "^8.3.2",
+    "contentful-management": "^7.51.5",
+    "contentful-migration": "^4.9.4",
+    "cross-fetch": "^3.1.5",
+    "csv-parse": "^4.16.3",
+    "csv-writer": "^1.6.0",
+    "dateformat": "^4.6.3",
+    "dayjs": "^1.10.7",
+    "doasync": "^2.0.1",
+    "dotenv": "^10.0.0",
+    "fs": "0.0.1-security",
+    "inquirer": "^7.3.3",
+    "json-diff": "^0.7.4",
+    "keypress": "^0.2.1",
+    "minimist": "^1.2.5",
+    "natural-orderby": "^2.0.3",
+    "node-fetch": "^2.6.7",
+    "path": "^0.12.7",
+    "process": "^0.11.10",
+    "sync-loop": "^0.1.1"
+  },
+  "resolutions": {
+    "rc": "1.2.8",
+    "coa": "2.0.2",
+    "ua-parser-js": "0.7.28",
+    "ansi-regex": "5.0.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
+    "eslint": "^7.17.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-cypress": "^2.11.2",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-no-only-tests": "^2.6.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "graphql-query-compress": "^1.2.4"
+  }
+}

@@ -1,0 +1,74 @@
+.adyen-checkout__mb-way .adyen-checkout__label__text {
+  margin-bottom: 5px !important;
+}
+
+.adyen-checkout__mb-way .adyen-checkout__input {
+  height: 48px !important;
+  border-radius: 0px;
+  padding-left: 15px;
+  border: 1px solid #b9c4c9 !important;
+}
+
+.adyen-checkout__field.adyen-checkout__field--storedCard {
+  display: none !important;
+}
+
+.adyen-checkout__checkbox__input + .adyen-checkout__checkbox__label:after {
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 4px !important;
+}
+
+.adyen-checkout__checkbox .adyen-checkout__checkbox__label {
+  padding-left: 36px !important;
+  display: flex !important;
+  height: 24px !important;
+  align-items: center !important;
+  font-size: 16px !important;
+  font-weight: 300 !important;
+  line-height: 16px !important;
+}
+
+.adyen-checkout__checkbox__input + .adyen-checkout__checkbox__label:before {
+  width: 7.5px !important;
+  height: 14px !important;
+  top: 3px !important;
+  left: 3px !important;
+}
+
+.adyen-checkout__checkbox__input:checked
+  + .adyen-checkout__checkbox__label:after {
+  background-color: #1a1d32 !important;
+  border: #1a1d32 !important;
+}
+
+.adyen-checkout__checkbox__input + .adyen-checkout__checkbox__label:hover {
+  border: #1a1d32 !important;
+}
+
+.adyen-checkout__card__form .adyen-checkout__field {
+  padding-top: 5px !important;
+  padding-bottom: 3px !important;
+}
+
+.adyen-checkout__card__form .adyen-checkout__input-wrapper {
+  padding-top: 7px !important;
+  height: 48px !important;
+}
+
+.adyen-checkout__store-details {
+  padding-top: 4px !important;
+}
+
+@media screen and (max-width: 767px) {
+  .adyen-checkout__iframe--threeDSIframe {
+    width: auto !important;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .adyen-checkout__iframe--threeDSIframe {
+    transform: scale(90%, 1) !important;
+    margin-left: -4% !important;
+  }
+}

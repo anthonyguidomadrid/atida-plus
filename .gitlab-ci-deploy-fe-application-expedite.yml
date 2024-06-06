@@ -1,0 +1,27 @@
+.uat-expedite:
+  variables:
+    ENVIRONMENT: uat
+    KUBE_NAMESPACE: $KUBE_NAMESPACE
+    AWS_IAM_ROLE_ARN: arn:aws:iam::180821729581:role/gitlab-frontend
+  tags:
+    - fast
+    - priority
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^(expedite\/)/
+      when: manual
+    - when: never
+  allow_failure: true
+
+.prod-expedite:
+  variables:
+    ENVIRONMENT: prod
+    KUBE_NAMESPACE: $KUBE_NAMESPACE
+    AWS_IAM_ROLE_ARN: arn:aws:iam::024195152389:role/gitlab-frontend
+  tags:
+    - fast
+    - priority
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^(expedite\/)/
+      when: manual
+    - when: never
+  allow_failure: true

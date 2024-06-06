@@ -1,0 +1,1 @@
+export const PROMOTION_VIEWED_THRESHOLD = 0.75

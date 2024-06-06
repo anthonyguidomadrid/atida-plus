@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend
+data:
+  NEW_RELIC_ENABLED: 'true'
+  NEW_RELIC_LOG_ENABLED: 'true'
+  NEW_RELIC_LOG: 'stdout'
+  NEW_RELIC_LOG_LEVEL: 'info'
+  NEW_RELIC_DISTRIBUTED_TRACING_ENABLED: 'true'
+  EXPONEA_TIMEOUT: '1000'
+  LEDGER_BASE_URL: http://ledger-service-app.platform

@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BreadcrumbsStructuredData renders first level breadcrumb structured data script tag with json-ld data 1`] = `
+<script
+  data-testid="structured-data-breadcrumbs"
+  type="application/ld+json"
+>
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Rosto"}]}
+</script>
+`;
+
+exports[`BreadcrumbsStructuredData renders second level breadcrumb structured data script tag with json-ld data 1`] = `
+<script
+  data-testid="structured-data-breadcrumbs"
+  type="application/ld+json"
+>
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Beleza","item":"somehost.com/en-gb/beleza"},{"@type":"ListItem","position":2,"name":"Rosto"}]}
+</script>
+`;
+
+exports[`BreadcrumbsStructuredData renders third level breadcrumb structured data script tag with json-ld data 1`] = `
+<script
+  data-testid="structured-data-breadcrumbs"
+  type="application/ld+json"
+>
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Beleza","item":"somehost.com/en-gb/beleza"},{"@type":"ListItem","position":2,"name":"Rosto","item":"somehost.com/en-gb/beleza/rosto"},{"@type":"ListItem","position":3,"name":"Acne"}]}
+</script>
+`;

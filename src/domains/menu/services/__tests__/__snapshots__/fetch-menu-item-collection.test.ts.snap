@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fetchMenuItemCollection returns a normalized response 1`] = `
+Object {
+  "id": "test-menu",
+  "title": "testTitle",
+}
+`;

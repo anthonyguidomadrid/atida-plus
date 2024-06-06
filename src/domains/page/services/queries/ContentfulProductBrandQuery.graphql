@@ -1,0 +1,18 @@
+  query ProductBrand(
+    $locale: String!
+    $allLocales: [String!]!
+    $id: String
+  ) {
+    brandCollection(where: { id: $id }) {
+    items {
+      title
+      linkedFrom(allowedLocales: $allLocales) {
+        pageCollection(limit: 1, locale: $locale) {
+          items {
+            slug
+          }
+        }
+      }
+    }
+  }
+}

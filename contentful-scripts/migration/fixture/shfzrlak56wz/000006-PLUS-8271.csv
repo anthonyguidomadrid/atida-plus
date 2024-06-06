@@ -1,0 +1,9 @@
+translation.key,translation.value.en-GB,translation.value.de-DE,translation.value.de-AT,translation.complete,sys.tags
+translation.key,translation.value.en-GB,translation.value.de-DE,translation.value.de-AT,translation.complete,sys.tags
+prescription.scanner.info-notification,Point the prescription code towards the camera.,Richten Sie den Rezeptcode auf die Kamera.,Richten Sie den Rezeptcode auf die Kamera.,true,country-de|country-at
+prescription.scanner.allow,Allow,Erlauben,Erlauben,true,country-de|country-at
+prescription.scanner-description.success-content,Image was successfully scanned.,Bild wurde erfolgreich gescannt.,Bild wurde erfolgreich gescannt.,true,country-de|country-at
+prescription.scanner-description.denial-title,You have previously denied camera access,Sie haben zuvor den Zugriff auf die Kamera verweigert,Sie haben zuvor den Zugriff auf die Kamera verweigert,true,country-de|country-at
+prescription.scanner-description.denial-content,To scan a prescription please adjust your browser settings or choose a different prescription redemtion method,Um ein Rezept zu scannen passen Sie bitte Ihre Browsereinstellungen an oder wählen Sie eine andere Methode zum Einlösen von Rezepten,Um ein Rezept zu scannen passen Sie bitte Ihre Browsereinstellungen an oder wählen Sie eine andere Methode zum Einlösen von Rezepten,true,country-de|country-at
+prescription.scanner-description.start-title,Scan another,Erneut scannen,Erneut scannen,true,country-de|country-at
+prescription.scan-button.scan-again,Allow atida.de to use your camera,Erlauben Sie atida.de Ihre Kamera zu verwenden,Erlauben Sie atida.de Ihre Kamera zu verwenden,true,country-de|country-at

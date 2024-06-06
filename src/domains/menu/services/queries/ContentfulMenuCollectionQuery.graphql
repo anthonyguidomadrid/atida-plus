@@ -1,0 +1,5 @@
+query getMenu($locale: String!, $menuTitle: String!) {
+  menuCollection(locale: $locale, where: { title: $menuTitle }, limit: 1) {
+    ...menu
+  }
+}

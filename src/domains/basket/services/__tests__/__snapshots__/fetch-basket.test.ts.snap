@@ -1,0 +1,674 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fetchBasket fetch authenticated user basket returns the normalized basket response 1`] = `
+Object {
+  "cartCoupons": Array [],
+  "coupons": Array [],
+  "currency": "EUR",
+  "discountTotal": 0,
+  "discountedItems": Array [],
+  "discounts": Array [],
+  "expenses": Array [
+    Object {
+      "quantity": 1,
+      "sumPriceToPayAggregation": 399,
+      "type": "SHIPMENT_EXPENSE",
+      "unitGrossPrice": 0,
+      "unitNetPrice": 0,
+    },
+  ],
+  "grandTotal": 9999,
+  "id": "f0849e9c-6712-54b9-8db5-440438d03387",
+  "items": Array [
+    Object {
+      "discount": 999,
+      "id": "100000001",
+      "isPromo": false,
+      "product": Object {
+        "alternativeUrls": Object {
+          "es-es": "",
+          "pt-pt": "forcapil-anti-caida-del-cabello-arkopharma-30-capsulas-2+1",
+        },
+        "availability": "AVAILABLE",
+        "brand": Object {
+          "code": "atida",
+          "label": "Atida",
+        },
+        "categories": Object {
+          "lvl0": Array [
+            "main",
+          ],
+        },
+        "contentSizeFactor": 1,
+        "description": "<p><strong>Forcapil Anti-Caída del Cabello Arkopharma 30 Cápsulas 2+1</strong>
+</p><p>¡Recupera la fuerza y vitalidad de tu cabello con Forcapil!
+</p><p>Indicado para hombres y mujeres, este nutricosmético previene y combate la caída del pelo.
+</p><p>Fórmula exclusivamente con ingredientes 100% de origen natural.
+</p><p>Tiene una alta concentración en biotina, y su composición con aminoácidos, vitaminas, minerales y plantas favorece el crecimiento de la melena.
+</p><p>Se recomienda tomar en momentos en los que sufrimos una mayor pérdida de cabello, causada por estrés, menopausia, tras el parto, cambios de estación...
+</p><p><strong>Tratamiento para 3 meses: 2 + 1 de REGALO.</strong>
+</p>",
+        "enabled": true,
+        "format": Object {
+          "code": "shampooCode",
+          "label": "Shampoo",
+        },
+        "gtin": "8428148462962",
+        "id": "100000001",
+        "images": Array [
+          Object {
+            "productDatImage": "https://sandbox-atida.bynder.com/transform/db2e62c0-2c32-4e50-bee7-1a7a421323f1/ean_img_8833772266123_0",
+            "productHigh": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20High-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+            "productTileThumbnail": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile%20Thumbnail-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+          },
+        ],
+        "labels": Array [
+          Object {
+            "label": "Free sponge",
+            "type": "promotion",
+          },
+          Object {
+            "label": "Outlet",
+            "type": "pricing-tag-outlet",
+          },
+          Object {
+            "label": "-11%",
+            "type": "discount",
+          },
+        ],
+        "largeImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20High-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "manufacturerName": "LOreal Deutschland",
+        "maxQuantity": 50,
+        "mediumImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Medium-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "metaDescription": "Meta description No contiene gluten. Apto para personas celíacas Meta description",
+        "metaKeywords": "Meta keywords NaturGreen Algarroba Meta keywords",
+        "metaTitle": "Meta title NaturGreen Algarroba a la Taza BIO 225gr Meta title",
+        "name": "Test Product 1",
+        "netWeight": Object {
+          "amount": 100,
+          "unit": "Grams",
+          "unitLabel": "g",
+        },
+        "pricePerUnit": Object {
+          "currency": "EUR",
+          "unit": "100 ml",
+          "value": 8888,
+        },
+        "productDatImage": "https://sandbox-atida.bynder.com/transform/db2e62c0-2c32-4e50-bee7-1a7a421323f1/ean_img_8833772266123_0",
+        "productTileImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "productTileRetinaImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile%20Retina-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "pzn": "1234567",
+        "rating": Object {
+          "averageRating": 3.5,
+          "numberOfReviews": 100,
+        },
+        "rrp": Object {
+          "currency": "EUR",
+          "value": 9999,
+        },
+        "shortDescription": "Preparado vegetal con harina de algarroba ecológica, ideal para desayunos y meriendas",
+        "thumbnailImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile%20Thumbnail-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "unitVolume": Object {
+          "amount": 100,
+          "unit": "MILLILITER",
+          "unitLabel": "ml",
+        },
+        "url": "/forcapil-anti-caida-del-cabello-arkopharma-30-capsulas-2+1",
+      },
+      "quantity": 1,
+      "sku": "100000001",
+      "subtotal": 9999,
+      "tax": 150,
+      "unitPrice": 9999,
+      "unitPriceToPayAggregation": 9849,
+    },
+    Object {
+      "discount": 999,
+      "id": "100000002",
+      "isPromo": false,
+      "product": Object {
+        "alternativeUrls": Object {
+          "es-es": "",
+          "pt-pt": "forcapil-anti-caida-del-cabello-arkopharma-30-capsulas-2+1",
+        },
+        "availability": "AVAILABLE",
+        "brand": Object {
+          "code": "atida",
+          "label": "Atida",
+        },
+        "categories": Object {
+          "lvl0": Array [
+            "main",
+          ],
+        },
+        "contentSizeFactor": 1,
+        "description": "<p><strong>Forcapil Anti-Caída del Cabello Arkopharma 30 Cápsulas 2+1</strong>
+</p><p>¡Recupera la fuerza y vitalidad de tu cabello con Forcapil!
+</p><p>Indicado para hombres y mujeres, este nutricosmético previene y combate la caída del pelo.
+</p><p>Fórmula exclusivamente con ingredientes 100% de origen natural.
+</p><p>Tiene una alta concentración en biotina, y su composición con aminoácidos, vitaminas, minerales y plantas favorece el crecimiento de la melena.
+</p><p>Se recomienda tomar en momentos en los que sufrimos una mayor pérdida de cabello, causada por estrés, menopausia, tras el parto, cambios de estación...
+</p><p><strong>Tratamiento para 3 meses: 2 + 1 de REGALO.</strong>
+</p>",
+        "enabled": true,
+        "format": Object {
+          "code": "shampooCode",
+          "label": "Shampoo",
+        },
+        "gtin": "8428148462962",
+        "id": "100000002",
+        "images": Array [
+          Object {
+            "productDatImage": "https://sandbox-atida.bynder.com/transform/db2e62c0-2c32-4e50-bee7-1a7a421323f1/ean_img_8833772266123_0",
+            "productHigh": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20High-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+            "productTileThumbnail": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile%20Thumbnail-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+          },
+        ],
+        "labels": Array [
+          Object {
+            "label": "Free sponge",
+            "type": "promotion",
+          },
+          Object {
+            "label": "Outlet",
+            "type": "pricing-tag-outlet",
+          },
+          Object {
+            "label": "-11%",
+            "type": "discount",
+          },
+        ],
+        "largeImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20High-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "manufacturerName": "LOreal Deutschland",
+        "maxQuantity": 50,
+        "mediumImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Medium-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "metaDescription": "Meta description No contiene gluten. Apto para personas celíacas Meta description",
+        "metaKeywords": "Meta keywords NaturGreen Algarroba Meta keywords",
+        "metaTitle": "Meta title NaturGreen Algarroba a la Taza BIO 225gr Meta title",
+        "name": "Test Product 2",
+        "netWeight": Object {
+          "amount": 100,
+          "unit": "Grams",
+          "unitLabel": "g",
+        },
+        "pricePerUnit": Object {
+          "currency": "EUR",
+          "unit": "100 ml",
+          "value": 8888,
+        },
+        "productDatImage": "https://sandbox-atida.bynder.com/transform/db2e62c0-2c32-4e50-bee7-1a7a421323f1/ean_img_8833772266123_0",
+        "productTileImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "productTileRetinaImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile%20Retina-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "pzn": "1234567",
+        "rating": Object {
+          "averageRating": 3.5,
+          "numberOfReviews": 100,
+        },
+        "rrp": Object {
+          "currency": "EUR",
+          "value": 9999,
+        },
+        "shortDescription": "Preparado vegetal con harina de algarroba ecológica, ideal para desayunos y meriendas",
+        "thumbnailImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile%20Thumbnail-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "unitVolume": Object {
+          "amount": 100,
+          "unit": "MILLILITER",
+          "unitLabel": "ml",
+        },
+        "url": "/forcapil-anti-caida-del-cabello-arkopharma-30-capsulas-2+1",
+      },
+      "quantity": 7,
+      "sku": "100000002",
+      "subtotal": 9999,
+      "tax": 150,
+      "unitPrice": 9999,
+      "unitPriceToPayAggregation": 9849,
+    },
+    Object {
+      "discount": 999,
+      "id": "100000003",
+      "isPromo": false,
+      "product": Object {
+        "alternativeUrls": Object {
+          "es-es": "",
+          "pt-pt": "forcapil-anti-caida-del-cabello-arkopharma-30-capsulas-2+1",
+        },
+        "availability": "AVAILABLE",
+        "brand": Object {
+          "code": "atida",
+          "label": "Atida",
+        },
+        "categories": Object {
+          "lvl0": Array [
+            "main",
+          ],
+        },
+        "contentSizeFactor": 1,
+        "description": "<p><strong>Forcapil Anti-Caída del Cabello Arkopharma 30 Cápsulas 2+1</strong>
+</p><p>¡Recupera la fuerza y vitalidad de tu cabello con Forcapil!
+</p><p>Indicado para hombres y mujeres, este nutricosmético previene y combate la caída del pelo.
+</p><p>Fórmula exclusivamente con ingredientes 100% de origen natural.
+</p><p>Tiene una alta concentración en biotina, y su composición con aminoácidos, vitaminas, minerales y plantas favorece el crecimiento de la melena.
+</p><p>Se recomienda tomar en momentos en los que sufrimos una mayor pérdida de cabello, causada por estrés, menopausia, tras el parto, cambios de estación...
+</p><p><strong>Tratamiento para 3 meses: 2 + 1 de REGALO.</strong>
+</p>",
+        "enabled": true,
+        "format": Object {
+          "code": "shampooCode",
+          "label": "Shampoo",
+        },
+        "gtin": "8428148462962",
+        "id": "100000003",
+        "images": Array [
+          Object {
+            "productDatImage": "https://sandbox-atida.bynder.com/transform/db2e62c0-2c32-4e50-bee7-1a7a421323f1/ean_img_8833772266123_0",
+            "productHigh": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20High-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+            "productTileThumbnail": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile%20Thumbnail-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+          },
+        ],
+        "labels": Array [
+          Object {
+            "label": "Free sponge",
+            "type": "promotion",
+          },
+          Object {
+            "label": "Outlet",
+            "type": "pricing-tag-outlet",
+          },
+          Object {
+            "label": "-11%",
+            "type": "discount",
+          },
+        ],
+        "largeImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20High-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "manufacturerName": "LOreal Deutschland",
+        "maxQuantity": 50,
+        "mediumImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Medium-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "metaDescription": "Meta description No contiene gluten. Apto para personas celíacas Meta description",
+        "metaKeywords": "Meta keywords NaturGreen Algarroba Meta keywords",
+        "metaTitle": "Meta title NaturGreen Algarroba a la Taza BIO 225gr Meta title",
+        "name": "Test Product 3",
+        "netWeight": Object {
+          "amount": 100,
+          "unit": "Grams",
+          "unitLabel": "g",
+        },
+        "pricePerUnit": Object {
+          "currency": "EUR",
+          "unit": "100 ml",
+          "value": 8888,
+        },
+        "productDatImage": "https://sandbox-atida.bynder.com/transform/db2e62c0-2c32-4e50-bee7-1a7a421323f1/ean_img_8833772266123_0",
+        "productTileImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "productTileRetinaImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile%20Retina-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "pzn": "1234567",
+        "rating": Object {
+          "averageRating": 3.5,
+          "numberOfReviews": 100,
+        },
+        "rrp": Object {
+          "currency": "EUR",
+          "value": 9999,
+        },
+        "shortDescription": "Preparado vegetal con harina de algarroba ecológica, ideal para desayunos y meriendas",
+        "thumbnailImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile%20Thumbnail-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "unitVolume": Object {
+          "amount": 100,
+          "unit": "MILLILITER",
+          "unitLabel": "ml",
+        },
+        "url": "/forcapil-anti-caida-del-cabello-arkopharma-30-capsulas-2+1",
+      },
+      "quantity": 3,
+      "sku": "100000003",
+      "subtotal": 9999,
+      "tax": 150,
+      "unitPrice": 9999,
+      "unitPriceToPayAggregation": 9849,
+    },
+  ],
+  "promotionalItems": Array [],
+  "rrpTotal": 9999,
+  "shippingTotal": 399,
+  "subTotal": 9999,
+  "taxTotal": 1596,
+}
+`;
+
+exports[`fetchBasket fetch guest basket returns the normalized basket response 1`] = `
+Object {
+  "cartCoupons": Array [],
+  "coupons": Array [],
+  "currency": "EUR",
+  "discountTotal": 0,
+  "discountedItems": Array [],
+  "discounts": Array [],
+  "expenses": Array [
+    Object {
+      "quantity": 1,
+      "sumPriceToPayAggregation": 399,
+      "type": "SHIPMENT_EXPENSE",
+      "unitGrossPrice": 0,
+      "unitNetPrice": 0,
+    },
+  ],
+  "freeShippingThreshold": 5900,
+  "grandTotal": 9999,
+  "id": "f0849e9c-6712-54b9-8db5-440438d03387",
+  "itemTotal": 648,
+  "items": Array [
+    Object {
+      "discount": 999,
+      "id": "100000001",
+      "isPromo": false,
+      "product": Object {
+        "alternativeUrls": Object {
+          "es-es": "",
+          "pt-pt": "forcapil-anti-caida-del-cabello-arkopharma-30-capsulas-2+1",
+        },
+        "availability": "AVAILABLE",
+        "brand": Object {
+          "code": "atida",
+          "label": "Atida",
+        },
+        "categories": Object {
+          "lvl0": Array [
+            "main",
+          ],
+        },
+        "contentSizeFactor": 1,
+        "description": "<p><strong>Forcapil Anti-Caída del Cabello Arkopharma 30 Cápsulas 2+1</strong>
+</p><p>¡Recupera la fuerza y vitalidad de tu cabello con Forcapil!
+</p><p>Indicado para hombres y mujeres, este nutricosmético previene y combate la caída del pelo.
+</p><p>Fórmula exclusivamente con ingredientes 100% de origen natural.
+</p><p>Tiene una alta concentración en biotina, y su composición con aminoácidos, vitaminas, minerales y plantas favorece el crecimiento de la melena.
+</p><p>Se recomienda tomar en momentos en los que sufrimos una mayor pérdida de cabello, causada por estrés, menopausia, tras el parto, cambios de estación...
+</p><p><strong>Tratamiento para 3 meses: 2 + 1 de REGALO.</strong>
+</p>",
+        "enabled": true,
+        "format": Object {
+          "code": "shampooCode",
+          "label": "Shampoo",
+        },
+        "gtin": "8428148462962",
+        "id": "100000001",
+        "images": Array [
+          Object {
+            "productDatImage": "https://sandbox-atida.bynder.com/transform/db2e62c0-2c32-4e50-bee7-1a7a421323f1/ean_img_8833772266123_0",
+            "productHigh": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20High-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+            "productTileThumbnail": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile%20Thumbnail-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+          },
+        ],
+        "labels": Array [
+          Object {
+            "label": "Free sponge",
+            "type": "promotion",
+          },
+          Object {
+            "label": "Outlet",
+            "type": "pricing-tag-outlet",
+          },
+          Object {
+            "label": "-11%",
+            "type": "discount",
+          },
+        ],
+        "largeImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20High-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "manufacturerName": "LOreal Deutschland",
+        "maxQuantity": 50,
+        "mediumImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Medium-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "metaDescription": "Meta description No contiene gluten. Apto para personas celíacas Meta description",
+        "metaKeywords": "Meta keywords NaturGreen Algarroba Meta keywords",
+        "metaTitle": "Meta title NaturGreen Algarroba a la Taza BIO 225gr Meta title",
+        "name": "Test Product 1",
+        "netWeight": Object {
+          "amount": 100,
+          "unit": "Grams",
+          "unitLabel": "g",
+        },
+        "pricePerUnit": Object {
+          "currency": "EUR",
+          "unit": "100 ml",
+          "value": 8888,
+        },
+        "productDatImage": "https://sandbox-atida.bynder.com/transform/db2e62c0-2c32-4e50-bee7-1a7a421323f1/ean_img_8833772266123_0",
+        "productTileImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "productTileRetinaImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile%20Retina-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "pzn": "1234567",
+        "rating": Object {
+          "averageRating": 3.5,
+          "numberOfReviews": 100,
+        },
+        "rrp": Object {
+          "currency": "EUR",
+          "value": 9999,
+        },
+        "shortDescription": "Preparado vegetal con harina de algarroba ecológica, ideal para desayunos y meriendas",
+        "thumbnailImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile%20Thumbnail-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "unitVolume": Object {
+          "amount": 100,
+          "unit": "MILLILITER",
+          "unitLabel": "ml",
+        },
+        "url": "/forcapil-anti-caida-del-cabello-arkopharma-30-capsulas-2+1",
+      },
+      "quantity": 1,
+      "sku": "100000001",
+      "subtotal": 9999,
+      "tax": 150,
+      "unitPrice": 9999,
+      "unitPriceToPayAggregation": 9849,
+    },
+    Object {
+      "discount": 999,
+      "id": "100000002",
+      "isPromo": false,
+      "product": Object {
+        "alternativeUrls": Object {
+          "es-es": "",
+          "pt-pt": "forcapil-anti-caida-del-cabello-arkopharma-30-capsulas-2+1",
+        },
+        "availability": "AVAILABLE",
+        "brand": Object {
+          "code": "atida",
+          "label": "Atida",
+        },
+        "categories": Object {
+          "lvl0": Array [
+            "main",
+          ],
+        },
+        "contentSizeFactor": 1,
+        "description": "<p><strong>Forcapil Anti-Caída del Cabello Arkopharma 30 Cápsulas 2+1</strong>
+</p><p>¡Recupera la fuerza y vitalidad de tu cabello con Forcapil!
+</p><p>Indicado para hombres y mujeres, este nutricosmético previene y combate la caída del pelo.
+</p><p>Fórmula exclusivamente con ingredientes 100% de origen natural.
+</p><p>Tiene una alta concentración en biotina, y su composición con aminoácidos, vitaminas, minerales y plantas favorece el crecimiento de la melena.
+</p><p>Se recomienda tomar en momentos en los que sufrimos una mayor pérdida de cabello, causada por estrés, menopausia, tras el parto, cambios de estación...
+</p><p><strong>Tratamiento para 3 meses: 2 + 1 de REGALO.</strong>
+</p>",
+        "enabled": true,
+        "format": Object {
+          "code": "shampooCode",
+          "label": "Shampoo",
+        },
+        "gtin": "8428148462962",
+        "id": "100000002",
+        "images": Array [
+          Object {
+            "productDatImage": "https://sandbox-atida.bynder.com/transform/db2e62c0-2c32-4e50-bee7-1a7a421323f1/ean_img_8833772266123_0",
+            "productHigh": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20High-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+            "productTileThumbnail": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile%20Thumbnail-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+          },
+        ],
+        "labels": Array [
+          Object {
+            "label": "Free sponge",
+            "type": "promotion",
+          },
+          Object {
+            "label": "Outlet",
+            "type": "pricing-tag-outlet",
+          },
+          Object {
+            "label": "-11%",
+            "type": "discount",
+          },
+        ],
+        "largeImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20High-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "manufacturerName": "LOreal Deutschland",
+        "maxQuantity": 50,
+        "mediumImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Medium-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "metaDescription": "Meta description No contiene gluten. Apto para personas celíacas Meta description",
+        "metaKeywords": "Meta keywords NaturGreen Algarroba Meta keywords",
+        "metaTitle": "Meta title NaturGreen Algarroba a la Taza BIO 225gr Meta title",
+        "name": "Test Product 2",
+        "netWeight": Object {
+          "amount": 100,
+          "unit": "Grams",
+          "unitLabel": "g",
+        },
+        "pricePerUnit": Object {
+          "currency": "EUR",
+          "unit": "100 ml",
+          "value": 8888,
+        },
+        "productDatImage": "https://sandbox-atida.bynder.com/transform/db2e62c0-2c32-4e50-bee7-1a7a421323f1/ean_img_8833772266123_0",
+        "productTileImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "productTileRetinaImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile%20Retina-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "pzn": "1234567",
+        "rating": Object {
+          "averageRating": 3.5,
+          "numberOfReviews": 100,
+        },
+        "rrp": Object {
+          "currency": "EUR",
+          "value": 9999,
+        },
+        "shortDescription": "Preparado vegetal con harina de algarroba ecológica, ideal para desayunos y meriendas",
+        "thumbnailImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile%20Thumbnail-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "unitVolume": Object {
+          "amount": 100,
+          "unit": "MILLILITER",
+          "unitLabel": "ml",
+        },
+        "url": "/forcapil-anti-caida-del-cabello-arkopharma-30-capsulas-2+1",
+      },
+      "quantity": 7,
+      "sku": "100000002",
+      "subtotal": 9999,
+      "tax": 150,
+      "unitPrice": 9999,
+      "unitPriceToPayAggregation": 9849,
+    },
+    Object {
+      "discount": 999,
+      "id": "100000003",
+      "isPromo": false,
+      "product": Object {
+        "alternativeUrls": Object {
+          "es-es": "",
+          "pt-pt": "forcapil-anti-caida-del-cabello-arkopharma-30-capsulas-2+1",
+        },
+        "availability": "AVAILABLE",
+        "brand": Object {
+          "code": "atida",
+          "label": "Atida",
+        },
+        "categories": Object {
+          "lvl0": Array [
+            "main",
+          ],
+        },
+        "contentSizeFactor": 1,
+        "description": "<p><strong>Forcapil Anti-Caída del Cabello Arkopharma 30 Cápsulas 2+1</strong>
+</p><p>¡Recupera la fuerza y vitalidad de tu cabello con Forcapil!
+</p><p>Indicado para hombres y mujeres, este nutricosmético previene y combate la caída del pelo.
+</p><p>Fórmula exclusivamente con ingredientes 100% de origen natural.
+</p><p>Tiene una alta concentración en biotina, y su composición con aminoácidos, vitaminas, minerales y plantas favorece el crecimiento de la melena.
+</p><p>Se recomienda tomar en momentos en los que sufrimos una mayor pérdida de cabello, causada por estrés, menopausia, tras el parto, cambios de estación...
+</p><p><strong>Tratamiento para 3 meses: 2 + 1 de REGALO.</strong>
+</p>",
+        "enabled": true,
+        "format": Object {
+          "code": "shampooCode",
+          "label": "Shampoo",
+        },
+        "gtin": "8428148462962",
+        "id": "100000003",
+        "images": Array [
+          Object {
+            "productDatImage": "https://sandbox-atida.bynder.com/transform/db2e62c0-2c32-4e50-bee7-1a7a421323f1/ean_img_8833772266123_0",
+            "productHigh": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20High-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+            "productTileThumbnail": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile%20Thumbnail-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+          },
+        ],
+        "labels": Array [
+          Object {
+            "label": "Free sponge",
+            "type": "promotion",
+          },
+          Object {
+            "label": "Outlet",
+            "type": "pricing-tag-outlet",
+          },
+          Object {
+            "label": "-11%",
+            "type": "discount",
+          },
+        ],
+        "largeImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20High-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "manufacturerName": "LOreal Deutschland",
+        "maxQuantity": 50,
+        "mediumImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Medium-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "metaDescription": "Meta description No contiene gluten. Apto para personas celíacas Meta description",
+        "metaKeywords": "Meta keywords NaturGreen Algarroba Meta keywords",
+        "metaTitle": "Meta title NaturGreen Algarroba a la Taza BIO 225gr Meta title",
+        "name": "Test Product 3",
+        "netWeight": Object {
+          "amount": 100,
+          "unit": "Grams",
+          "unitLabel": "g",
+        },
+        "pricePerUnit": Object {
+          "currency": "EUR",
+          "unit": "100 ml",
+          "value": 8888,
+        },
+        "productDatImage": "https://sandbox-atida.bynder.com/transform/db2e62c0-2c32-4e50-bee7-1a7a421323f1/ean_img_8833772266123_0",
+        "productTileImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "productTileRetinaImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile%20Retina-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "pzn": "1234567",
+        "rating": Object {
+          "averageRating": 3.5,
+          "numberOfReviews": 100,
+        },
+        "rrp": Object {
+          "currency": "EUR",
+          "value": 9999,
+        },
+        "shortDescription": "Preparado vegetal con harina de algarroba ecológica, ideal para desayunos y meriendas",
+        "thumbnailImage": "https://d2csxpduxe849s.cloudfront.net/media/07EADC8C-9435-4B3D-87CF5EDA882A36F2/F1974216-C01C-415C-B00F4AEBC6928147/Product%20Tile%20Thumbnail-51236DF8-2D7D-4757-AF2614FABA305C0A.png",
+        "unitVolume": Object {
+          "amount": 100,
+          "unit": "MILLILITER",
+          "unitLabel": "ml",
+        },
+        "url": "/forcapil-anti-caida-del-cabello-arkopharma-30-capsulas-2+1",
+      },
+      "quantity": 3,
+      "sku": "100000003",
+      "subtotal": 9999,
+      "tax": 150,
+      "unitPrice": 9999,
+      "unitPriceToPayAggregation": 9849,
+    },
+  ],
+  "promotionalItems": Array [],
+  "rrpTotal": 9999,
+  "shippingTotal": 399,
+  "subTotal": 9999,
+  "surchargeTotal": 123,
+  "taxTotal": 1596,
+}
+`;

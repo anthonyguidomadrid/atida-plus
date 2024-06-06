@@ -1,0 +1,67 @@
+fragment promo on Promotion {
+  id
+}
+fragment promotion on Promotion {
+  __typename
+  sys {
+    firstPublishedAt
+  }
+  title
+  id
+  itemsToFilterBy
+  description {
+    __typename
+    json
+  }
+  sponsored
+  promoInformation {
+    __typename
+    json
+  }
+  teaserDescription
+  color {
+    __typename
+    ref
+  }
+  image {
+    __typename
+    url
+  }
+  teaserImage {
+    __typename
+    url
+  }
+  categoriesCollection(limit: 5) {
+    items {
+      __typename
+      id
+    }
+  }
+  isContentWithImage: teaserType
+  validFrom
+  validTo
+  labelsCollection(limit: 2) {
+    items {
+      __typename
+      ... on Translation {
+        key
+        value
+      }
+      ... on TranslationInfoLabel {
+        key: labelKey
+        value: title
+      }
+    }
+  }
+  url: linkedFrom(allowedLocales: $allLocales) {
+    pageCollection(limit: 35, locale: $locale) {
+      items {
+        slug
+        referencedContent {
+          __typename
+          ...promo
+        }
+      }
+    }
+  }
+}

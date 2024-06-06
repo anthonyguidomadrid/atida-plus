@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductSEO available product renders script tag with json-ld data 1`] = `
+<script
+  type="application/ld+json"
+>
+  {"@context":"https://schema.org","@type":"Product","name":"Some product","image":"some-product-image.jpg","description":"Some description of the product","brand":{"@type":"Brand","name":"Some brand"},"sku":"1010101","gtin":"1234567890123","gtin13":"1234567890123","offers":{"@type":"Offer","price":"12.34","url":"somehost.com/en-gb/some-product-url","availability":"https://schema.org/InStock","priceCurrency":"EUR"}}
+</script>
+`;
+
+exports[`ProductSEO rating does not render rating when flag is off 1`] = `
+<script
+  type="application/ld+json"
+>
+  {"@context":"https://schema.org","@type":"Product","name":"Some product","image":"some-product-image.jpg","description":"Some description of the product","brand":{"@type":"Brand","name":"Some brand"},"sku":"1010101","gtin":"1234567890123","gtin13":"1234567890123","offers":{"@type":"Offer","price":"12.34","url":"somehost.com/en-gb/some-product-url","availability":"https://schema.org/InStock","priceCurrency":"EUR"},"aggregateRating":{"@type":"AggregateRating","ratingValue":3.5,"reviewCount":100}}
+</script>
+`;
+
+exports[`ProductSEO rating renders rating when flag is on 1`] = `
+<script
+  type="application/ld+json"
+>
+  {"@context":"https://schema.org","@type":"Product","name":"Some product","image":"some-product-image.jpg","description":"Some description of the product","brand":{"@type":"Brand","name":"Some brand"},"sku":"1010101","gtin":"1234567890123","gtin13":"1234567890123","offers":{"@type":"Offer","price":"12.34","url":"somehost.com/en-gb/some-product-url","availability":"https://schema.org/InStock","priceCurrency":"EUR"},"aggregateRating":{"@type":"AggregateRating","ratingValue":3.5,"reviewCount":100}}
+</script>
+`;

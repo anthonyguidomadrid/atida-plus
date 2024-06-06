@@ -1,0 +1,6 @@
+- op: replace
+  path: /spec/rules/0/host
+  value: dev.atida.com
+- op: replace
+  path: /spec/rules/1/host
+  value: www.dev.atida.com

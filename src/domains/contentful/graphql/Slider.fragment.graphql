@@ -1,0 +1,34 @@
+fragment slider on Slider {
+  name
+  contentBlocksCollection(limit: 5) {
+    items {
+      __typename
+      heroBannerTitle: newTitle
+      searchPlaceholder
+      isSponsoredContent
+      link {
+        __typename
+        label
+        url
+        icon {
+          __typename
+          ref
+        }
+        content {
+          __typename
+          json
+        }
+      }
+      text {
+        __typename
+        json
+      }
+      imageAsset {
+        __typename
+        url
+        title
+        description
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+export const MOBILE_ADD_NEW_CARD_BUTTON_HEIGHT = 58

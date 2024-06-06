@@ -1,0 +1,17 @@
+fragment menuItem on MenuItem {
+  __typename
+  id
+  title
+  link {
+    ...on Page {
+      __typename
+      title
+      slug
+    }
+    ... on Link {
+      __typename
+      url
+      label
+    }
+  }
+}

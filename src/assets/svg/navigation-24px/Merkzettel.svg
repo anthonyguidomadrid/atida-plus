@@ -1,0 +1,13 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Size=24px, Type=Merkzettel, Menu=Other">
+<g id="Frame" clip-path="url(#clip0)">
+<path id="Vector" d="M17.5 2H7.2V5.1L9.2 6.9V11.8L5 13.1V15.8H12.4H19.8V13.1L15.6 11.8V6.9L17.5 5.1V2Z" stroke="black" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M12.3 15.7998V22.5998" stroke="black" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0">
+<rect width="16.8" height="22.6" fill="white" transform="translate(4 1)"/>
+</clipPath>
+</defs>
+</svg>

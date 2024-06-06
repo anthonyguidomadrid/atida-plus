@@ -1,0 +1,114 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  template:
+    spec:
+      restartPolicy: Always
+      containers:
+        - $patch: replace
+        - name: frontend
+          image: frontend
+          resources:
+            requests:
+              cpu: 500m
+              memory: '300Mi'
+            limits:
+              cpu: 1000m
+              memory: '1Gi'
+          envFrom:
+            - configMapRef:
+                name: frontend
+          env:
+            - name: CMS_PREVIEW_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: frontend
+                  key: CMS_PREVIEW_TOKEN
+            - name: CMS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: frontend
+                  key: CMS_TOKEN
+            - name: ELASTICSEARCH_BASICAUTH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: frontend
+                  key: ELASTICSEARCH_BASICAUTH_PASSWORD
+            - name: NEW_RELIC_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: frontend
+                  key: NEW_RELIC_LICENSE_KEY
+            - name: REDIS_AUTH
+              valueFrom:
+                secretKeyRef:
+                  name: frontend
+                  key: REDIS_AUTH
+            - name: LAUNCH_DARKLY_SDK_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: frontend
+                  key: LAUNCH_DARKLY_SDK_KEY
+            - name: DEFAULT_CACHE_TTL_MS
+              valueFrom:
+                secretKeyRef:
+                  name: frontend
+                  key: DEFAULT_CACHE_TTL_MS
+            - name: ALGOLIA_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: frontend
+                  key: ALGOLIA_API_KEY
+            - name: SEGMENT_WRITE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: frontend
+                  key: SEGMENT_WRITE_KEY
+            - name: EXPONEA_API_KEY_PT
+              valueFrom:
+                secretKeyRef:
+                  name: frontend
+                  key: EXPONEA_API_KEY_PT
+            - name: EXPONEA_API_KEY_ES
+              valueFrom:
+                secretKeyRef:
+                  name: frontend
+                  key: EXPONEA_API_KEY_ES
+            - name: EXPONEA_SECRET_PT
+              valueFrom:
+                secretKeyRef:
+                  name: frontend
+                  key: EXPONEA_SECRET_PT
+            - name: EXPONEA_SECRET_ES
+              valueFrom:
+                secretKeyRef:
+                  name: frontend
+                  key: EXPONEA_SECRET_ES
+            - name: GEOCODE_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: frontend
+                  key: GEOCODE_API_KEY
+          livenessProbe:
+            httpGet:
+              path: /api/test
+              port: 3000
+            initialDelaySeconds: 360
+            periodSeconds: 60
+            timeoutSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /api/test
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 3
+          lifecycle:
+            preStop:
+              exec:
+                command: ['/bin/sh', '-c', 'sleep 10']
+          volumeMounts:
+            - mountPath: /app/storage
+              name: json-storage

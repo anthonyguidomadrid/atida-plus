@@ -1,0 +1,15 @@
+.postman_tests:
+  image:
+    name: vdespa/newman
+    entrypoint: [""]
+  tags:
+    - ec2
+  script:
+    - newman run -e tests/postman/AtidaPlus-multibanco-demo-tests.postman_environment.json tests/postman/AtidaPlus-multibanco-demo-tests.postman_collection.json --reporters cli,junit,htmlextra --reporter-junit-export tests/postman/newman-results.xml --reporter-htmlextra-export tests/postman/newman-results.html
+  artifacts:
+    when: always
+    paths:
+      - tests/postman/newman-results.html
+    reports:
+      junit:
+        - tests/postman/newman-results.xml

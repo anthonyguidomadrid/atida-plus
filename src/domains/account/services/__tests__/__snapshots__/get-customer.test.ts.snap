@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getCustomer customer with addresses returns the correct response 1`] = `
+Object {
+  "accountType": "Personal",
+  "addresses": Array [
+    Object {
+      "address1": "some-address",
+      "address2": "some-address2",
+      "address3": "some-address3",
+      "city": "some-city",
+      "company": "some-company",
+      "country": "some-country",
+      "firstName": "some-name",
+      "id": "address-id-1",
+      "isDefaultBilling": true,
+      "isDefaultShipping": true,
+      "isTaxExempt": false,
+      "iso2Code": "some-iso-code",
+      "lastName": "some-last-name",
+      "phone": "some-phone",
+      "salutation": "some-salutation",
+      "zipCode": "some-zip-code",
+    },
+    Object {
+      "address1": "some-other-address",
+      "address2": "some-other-address2",
+      "address3": "some-other-address3",
+      "city": "some-other-city",
+      "company": "some-other-company",
+      "country": "some-other-country",
+      "firstName": "some-other-name",
+      "id": "address-id-2",
+      "isDefaultBilling": false,
+      "isDefaultShipping": false,
+      "isTaxExempt": false,
+      "iso2Code": "some-other-iso-code",
+      "lastName": "some-other-last-name",
+      "phone": "some-other-phone",
+      "salutation": "some-other-salutation",
+      "zipCode": "some-other-zip-code",
+    },
+  ],
+  "company": null,
+  "email": "some@email.com",
+  "emailNotification": true,
+  "firstName": "Test",
+  "lastName": "McTest",
+  "salutation": "Mr",
+  "surcharge": false,
+}
+`;
+
+exports[`getCustomer customer without addresses returns the correct response 1`] = `
+Object {
+  "accountType": "Personal",
+  "addresses": Array [],
+  "company": null,
+  "email": "some@email.com",
+  "emailNotification": true,
+  "firstName": "Test",
+  "lastName": "McTest",
+  "salutation": "Mr",
+  "surcharge": false,
+}
+`;

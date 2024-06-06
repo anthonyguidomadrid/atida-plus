@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrandPageSEO renders script tag with json-ld data 1`] = `
+<script
+  data-testid="structured-data-brand-page"
+  type="application/ld+json"
+>
+  {"@context":"https://schema.org","@type":"Brand","name":"Some brand","description":"A description of the brand","url":"somehost.com/en-gb/brand/some-brand","image":"some-brand-logo.png"}
+</script>
+`;

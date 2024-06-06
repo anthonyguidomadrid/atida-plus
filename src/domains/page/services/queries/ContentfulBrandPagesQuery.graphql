@@ -1,0 +1,25 @@
+  query BrandPages(
+    $locale: String!
+    $tags: [String!]!
+  ) {
+    pageCollection(
+      locale: $locale
+      where: {
+        referencedContent_exists: true
+        pageType_contains: "brand"
+        contentfulMetadata: { tags: { id_contains_all: $tags } }
+      }
+      order: [title_ASC]
+      limit: 2000
+    ) {
+    total
+      items {
+        __typename
+        referencedContent {
+          __typename
+          ...brand
+        }
+        slug
+      }
+    }
+  }

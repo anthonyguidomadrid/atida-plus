@@ -1,0 +1,65 @@
+fragment category on Category {
+  title
+  id
+  color {
+    __typename
+    ref
+  }
+  image {
+    __typename
+    url
+  }
+  level
+  subcategories: subcategoriesCollection {
+    items {
+      id
+      title
+      level
+      linkedFrom(allowedLocales: $allLocales) {
+        pageCollection(limit: 1, locale: $locale) {
+          items {
+            slug
+            title
+          }
+        }
+      }
+    }
+  }
+  linkedFrom(allowedLocales: $allLocales) {
+    categoryCollection(limit: 1, locale: $locale) {
+      items {
+        id
+        title
+        linkedFrom(allowedLocales: $allLocales) {
+          categoryCollection(limit: 1, locale: $locale) {
+            items {
+              id
+              title
+              linkedFrom(allowedLocales: $allLocales) {
+                pageCollection(limit: 1, locale: $locale) {
+                  items {
+                    slug
+                  }
+                }
+              }
+            }
+          }
+        }
+        linkedFrom(allowedLocales: $allLocales) {
+          pageCollection(limit: 1, locale: $locale) {
+            items {
+              slug
+            }
+          }
+        }
+      }
+    }
+  }
+  linkedFrom(allowedLocales: $allLocales) {
+    pageCollection(limit: 1, locale: $locale) {
+      items {
+        slug
+      }
+    }
+  }
+}
